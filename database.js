@@ -4,5 +4,5 @@ export const db_conn = mysql.createPool({
   host: "localhost",
   user: "tmh-app",
   password: "abc123",
-  database: "the-mobile-hour";
+  database: "the-mobile-hour",
 });

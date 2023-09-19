@@ -1,3 +1,4 @@
+// creates a connection with the mobile hour mysql database
 import { db_conn } from "../database.js";
 
 export function newProduct(
@@ -133,7 +134,6 @@ export function update(product) {
 }
 
 // DELETE
-// TODO: Test functionality
 export function deleteByID(productID) {
   return db_conn.query(`DELETE FROM products WHERE product_id = ?`, [
     productID,

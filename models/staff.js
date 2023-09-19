@@ -1,3 +1,4 @@
+// creates a connection with the mobile hour mysql database
 import { db_conn } from "../database.js";
 
 // returns an object that gives the information of staff all bundled back together

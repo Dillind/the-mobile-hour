@@ -1,10 +1,10 @@
-import express from 'express';
+import express from "express";
 
 const app = express();
 const port = 8080;
 
 // Enable support for URL-encoded request bodies (form posts)
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
 // Setup and use session middleware (!Importance: session middleware remembers the user when they navigate between pages)
 
@@ -17,7 +17,13 @@ app.set("view engine", "ejs");
 app.use(express.static("static"));
 
 // TODO: Import and use controllers
+import productController from "./controllers/products.js";
+app.use(productController);
+import orderController from "./controllers/orders.js";
+app.use(orderController);
+import staffController from "./controllers/staff.js";
+app.use(staffController);
 
 app.listen(port, () => {
-    console.log(`Express server started on http://localhost:${port}`)
-})
+  console.log(`Express server started on http://localhost:${port}`);
+});

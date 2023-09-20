@@ -24,7 +24,7 @@ export function newStaff(
 export function create(staff) {
   return db_conn.query(
     // ?, ?, ?, ?, ? - parameter bindings (placeholders that help prevent sql injection)
-    `INSERT INTO staff (staff_first_name, staff_last_name, staff_role, staff_username, staff_password)
+    `INSERT INTO staff (staff_first_name, staff_last_name, staff_access_role, staff_username, staff_password)
     VALUES(?, ?, ?, ?, ?)`,
     [
       staff.first_name,

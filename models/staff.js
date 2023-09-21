@@ -81,6 +81,26 @@ export function getById(staffId) {
     });
 }
 
+export function getByUsername(username) {
+  return db_conn
+    .query(`SELECT * FROM staff WHERE staff_username = ?`, [username])
+    .then(([queryResult]) => {
+      if (queryResult.length > 0) {
+        const result = queryResult[0];
+        return newStaff(
+          result.staff_id,
+          result.staff_first_name,
+          result.staff_last_name,
+          result.staff_access_role,
+          result.staff_username,
+          result.staff_password
+        );
+      } else {
+        return Promise.reject("No matching username found");
+      }
+    });
+}
+
 // UPDATE
 
 export function update(staff) {

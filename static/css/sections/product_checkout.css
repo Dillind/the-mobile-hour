@@ -1,0 +1,8 @@
+.phone-card-single {
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-card-single img {
+  width: 100%;
+}

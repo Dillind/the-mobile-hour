@@ -1,0 +1,34 @@
+/* google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+/* external css files */
+
+@import url("sections/product_list.css");
+@import url("sections/product_checkout.css");
+
+/* css variables for reusability */
+
+:root {
+  --light-grey: #f2f2f2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--light-grey);
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+main {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1000px;
+}
+
+/* media queries */

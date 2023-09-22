@@ -1,0 +1,85 @@
+.header-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+}
+
+.header-nav .header-brand a {
+  text-decoration: none;
+}
+
+.header-nav .header-brand a > h3 {
+  background-color: var(--black);
+  color: var(--primary-color);
+  padding: 5px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.header-navbar-links ul {
+  margin: 0;
+  padding-right: 1rem;
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.header-navbar-links ul > li > a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+#menu-toggle-button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#menu-toggle-button svg {
+  height: 1.8rem;
+  width: 1.8rem;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+/* display open icon on default view */
+#menu-toggle-button .openIcon {
+  display: block;
+}
+
+/* hide close icon on default view */
+#menu-toggle-button .closeIcon {
+  display: none;
+}
+
+/* when open icon toggled, hide open icon */
+#menu-toggle-button.open .openIcon {
+  display: none;
+}
+
+/* when open icon toggled, display close icon */
+#menu-toggle-button.open .closeIcon {
+  display: block;
+}
+
+/* media queries */
+@media screen and (max-width: 600px) {
+  #menu-toggle-button {
+    display: block;
+  }
+
+  .header-navbar-links {
+    display: none;
+  }
+
+  .header-nav .header-brand a {
+    font-size: 1.1rem;
+  }
+}

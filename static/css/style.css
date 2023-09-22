@@ -4,11 +4,15 @@
 
 @import url("sections/product_list.css");
 @import url("sections/product_checkout.css");
+@import url("sections/footer.css");
+@import url("sections/header.css");
 
 /* css variables for reusability */
 
 :root {
   --light-grey: #f2f2f2;
+  --black: #000000;
+  --primary-color: #ffa723;
 }
 
 * {

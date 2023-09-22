@@ -1,0 +1,43 @@
+footer {
+  border-top: 2px solid black;
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer > h3 {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.footer-policy > ul {
+  list-style: none;
+  font-size: 12px;
+}
+
+.footer-policy > ul > li {
+  margin: 10px;
+}
+
+.footer-policy > ul > li:nth-child(2) > span a {
+  text-decoration: none;
+  color: #000000;
+  margin: 5px;
+}
+
+.footer-policy > ul > li:nth-child(2) > span a:hover {
+  text-decoration: underline 2px red;
+}
+
+/* social media links */
+.footer-social > ul {
+  gap: 5px;
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-social > ul > li {
+  cursor: pointer;
+}

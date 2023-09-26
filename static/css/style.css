@@ -2,17 +2,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 /* external css files */
 
+/* GENERAL CSS */
+@import url("sections/header.css");
+@import url("sections/home.css");
+@import url("sections/about.css");
+@import url("sections/contact.css");
+@import url("sections/footer.css");
+
+/* PRODUCT CSS */
 @import url("sections/product_list.css");
 @import url("sections/product_checkout.css");
-@import url("sections/footer.css");
-@import url("sections/header.css");
+
+/* STAFF CSS */
+@import url("sections/staff_login.css");
+
+/* ORDER CSS */
+@import url("sections/order_admin.css");
+@import url("sections/order_admin_nav.css");
 
 /* css variables for reusability */
 
 :root {
   --light-grey: #f2f2f2;
   --black: #000000;
+  --white: #ffffff;
   --primary-color: #ffa723;
+  --dark-grey: #171a20;
+  --color-error: #cc3333;
+  --color-success: #4bb544;
 }
 
 * {
@@ -33,6 +50,30 @@ main {
   margin: 0 auto;
   width: 90%;
   max-width: 1000px;
+  margin-top: 10px;
+}
+
+.button {
+  padding: 10px;
+  font-weight: 800;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 38px;
+  width: 57px;
+}
+
+.button-primary {
+  background-color: var(--dark-grey);
+  color: var(--white);
+}
+
+.button-secondary {
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
 }
 
 /* media queries */

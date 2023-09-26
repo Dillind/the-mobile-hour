@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 
 const app = express();
 const port = 8080;
@@ -8,15 +9,36 @@ app.use(express.urlencoded({ extended: true }));
 
 // Setup and use session middleware (!Importance: session middleware remembers the user when they navigate between pages)
 
+app.use(
+  session({
+    secret: "secret phrase",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
+  })
+);
+
 // Setup and use the EJS view engine
 app.set("view engine", "ejs");
 
 // TODO: Setup 404 and root page redirects
 
+app.get("/", (req, res) => {
+  res.render("home.ejs");
+});
+
+app.get("/about", (req, res) => {
+  res.render("about.ejs");
+});
+
+app.get("/contact", (req, res) => {
+  res.render("contact.ejs");
+});
+
 // Setup and use static files middleware
 app.use(express.static("static"));
 
-// TODO: Import and use controllers
+// Import and use controllers
 import productController from "./controllers/products.js";
 app.use(productController);
 import orderController from "./controllers/orders.js";

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head.ejs") %>
+    <title>The Mobile Hour - Order Admin Create</title>
+  </head>
+  <body>
+    <!-- Header / nav -->
+    <%- include("partials/admin_navigation.ejs") %>
+    <main>
+      <h1 class="admin-title">Create Order</h1>
+      <!-- Order Admin Navigation -->
+      <%- include("partials/order_admin_nav.ejs") %>
+      <section>
+        <form action="/create_order" method="post" class="create-order-form">
+          <!-- Product Selection -->
+          <label for="product">Product:</label>
+          <select name="product_id" id="product" class="customer-form-input">
+            <% for (const product of products) { %>
+            <option value="<%= product.id %>">
+              <%= product.name %> - $<%= product.price %>
+            </option>
+            <% } %>
+          </select>
+
+          <!-- Customer First Name -->
+          <label for="customer-first-name">First Name:</label>
+          <input
+            type="text"
+            name="customer_first_name"
+            class="customer-form-input"
+            id="customer-first-name"
+            placeholder="Enter your first name"
+            required
+          />
+          <!-- Customer Last Name -->
+          <label for="customer-last-name">Last Name:</label>
+          <input
+            type="text"
+            name="customer_last_name"
+            class="customer-form-input"
+            id="customer-last-name"
+            placeholder="Enter your last name"
+            required
+          />
+          <!-- Customer Phone -->
+          <label for="customer-phone">Phone Number:</label>
+          <input
+            type="tel"
+            name="customer_phone"
+            class="customer-form-input"
+            id="customer-phone"
+            placeholder="Enter your phone number"
+            required
+          />
+          <!-- Customer Email -->
+          <label for="customer-email">Email Address:</label>
+          <input
+            type="email"
+            name="customer_email"
+            class="customer-form-input"
+            id="customer-email"
+            placeholder="Enter your email address"
+            required
+          />
+          <input
+            type="submit"
+            value="Create Order"
+            class="button-primary button"
+          />
+        </form>
+      </section>
+    </main>
+    <!--  Footer -->
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>

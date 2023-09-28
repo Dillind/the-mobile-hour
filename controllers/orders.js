@@ -73,12 +73,10 @@ orderController.post("/create_order", (req, res) => {
     // Save order to database
     Orders.create(newOrder)
       .then(([result]) => {
-        const orderID = result.insertId;
-        // Send order details
-        res.send(`Order created with id ${orderID}`);
+        res.redirect("/order_confirmation?=id" + result.insertId);
       })
       .catch((error) => {
-        //Handle errors
+        // Handle errors
         res.status(500).send(`Failed to create order ${error}`);
       });
   } else {
@@ -89,25 +87,30 @@ orderController.post("/create_order", (req, res) => {
 
 // Get order confirmation details endpoint
 orderController.get("/order_confirmation", (req, res) => {
+  if (!/[0-9]{1,}/.test(req.query.id)) {
+    // Status response for non-valid ID
+    res.render("status.ejs", {
+      status: "Invalid order ID",
+      message: "Please contact the support team.",
+    });
+    return;
+  }
+
   // Check if the query string has the order id
   if (req.query.id) {
-    const orderId = req.query.id;
-    // TODO: Validate the id
-    // Get order by id
-    Orders.getById(orderId)
-      .then((order) => {
-        // Send back order details
-        res.send(
-          `The current order status for ${order.customer_first_name} ${order.customer_last_name} is: ${order.status}`
-        );
+    OrdersProducts.getAllByOrderId(req.query.id)
+      .then((orderProduct) => {
+        res.render("order_confirmation.ejs", {
+          orderProduct,
+        });
       })
       .catch((error) => {
         // Handle errors
-        res.status(500).send(`Failed to get order: ${error}`);
+        res.render("status.ejs", {
+          status: "Failed to retrieve order status",
+          message: error,
+        });
       });
-  } else {
-    // Handle error caused if no id exists
-    res.status(400).send("No such order id exists");
   }
 });
 

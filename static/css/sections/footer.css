@@ -25,7 +25,7 @@ footer > h3 {
 }
 
 .footer-policy > ul > li:nth-child(2) > span a:hover {
-  text-decoration: underline 2px red;
+  text-decoration: underline 2px var(--primary-color);
 }
 
 /* social media links */

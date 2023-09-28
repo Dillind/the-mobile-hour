@@ -1,11 +1,29 @@
-.product-list-title {
+.product-list-search {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
-.product-list-title h2 {
+.product-list-title {
   font-size: 1rem;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+}
+
+.search-form-input {
+  border: 1px solid var(--black);
+  padding: 5px;
+  font-size: 12px;
+  outline: none;
+}
+
+.search-btn {
+  padding: 5px;
 }
 
 .product-list-banner {
@@ -15,12 +33,12 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .product-list-banner::before {
   content: "";
-  background-image: url("/img/mobile-products-banner.jpg");
+  background-image: url("/img/product-list-banner.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
@@ -28,29 +46,14 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .product-list-banner h3 {
   position: relative;
-  color: #000000;
-  font-size: 1.5rem;
-  text-align: center;
+  color: var(--black);
+  font-size: 1.2rem;
   font-weight: 800;
-}
-
-.search-form {
-  width: 100%;
-  max-width: 200px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-input,
-select {
-  border: 1px solid black;
-  padding: 5px;
-  font-size: 12px;
 }
 
 .phone-list {
@@ -58,23 +61,32 @@ select {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin: 20px 0;
+  place-content: center;
+  width: 100%;
 }
 
 .phone-card {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
   border-radius: 6px;
-  box-shadow: 0px 3.03936px 3.03936px 0px rgba(0, 0, 0, 0.25);
-  background: #fff;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
+  background: var(--white);
   padding: 10px;
+  max-width: 400px;
 }
 
 .phone-card h2 {
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
+}
+
+.phone-card .phone-card-details {
+  font-size: 16px;
+  margin-top: 15px;
 }
 
 .phone-card img {
@@ -86,19 +98,5 @@ select {
   grid-template-columns: 1fr 1fr;
   font-size: 10px;
   place-items: center;
-}
-
-.phone-card a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  text-decoration: none;
-  font-weight: 800;
-  text-align: center;
-  border: black 1px solid;
-  border-radius: 6px;
-  color: black;
-  width: 100%;
-  font-size: 10px;
+  gap: 50px;
 }

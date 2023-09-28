@@ -19,6 +19,8 @@
 /* ORDER CSS */
 @import url("sections/order_admin.css");
 @import url("sections/order_admin_nav.css");
+@import url("sections/order_admin_create.css");
+@import url("sections/order_confirmation.css");
 
 /* css variables for reusability */
 
@@ -55,15 +57,18 @@ main {
 
 .button {
   padding: 10px;
+  margin-top: 10px;
   font-weight: 800;
   border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
   border: none;
   outline: none;
+  text-align: center;
   cursor: pointer;
   height: 38px;
-  width: 57px;
+  max-width: 100px;
+  width: 100%;
 }
 
 .button-primary {
@@ -74,6 +79,14 @@ main {
 .button-secondary {
   background-color: var(--primary-color);
   color: var(--dark-grey);
+}
+
+.stock-available {
+  color: var(--color-success);
+}
+
+.stock-unavailable {
+  color: var(--color-error);
 }
 
 /* media queries */

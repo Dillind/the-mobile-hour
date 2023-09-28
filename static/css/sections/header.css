@@ -1,9 +1,11 @@
 .header-nav {
+  margin: 0 auto;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.8rem 1rem;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .header-nav .header-brand a {
@@ -13,7 +15,7 @@
 .header-nav .header-brand a > h3 {
   background-color: var(--black);
   color: var(--primary-color);
-  padding: 5px;
+  padding: 10px;
   font-size: 1.1rem;
   text-align: center;
 }
@@ -31,14 +33,18 @@
   text-decoration: none;
 }
 
+.header-navbar-links ul > li > a:hover {
+  text-decoration: underline 2px var(--primary-color);
+}
+
 #menu-toggle-button {
   background-color: transparent;
   border: 0;
   cursor: pointer;
   display: none;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 25px;
 }
 
 #menu-toggle-button svg {
@@ -70,7 +76,7 @@
 }
 
 /* media queries */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   #menu-toggle-button {
     display: block;
   }

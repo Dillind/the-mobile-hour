@@ -1,11 +1,7 @@
 export default function access_control(allowedRoles) {
   return function (req, res, next) {
     if (req.session.user != null) {
-      if (
-        allowedRoles.some(
-          (allowedRole) => allowedRole === req.session.user.accessRole
-        )
-      ) {
+      if (allowedRoles.includes(req.session.user.accessRole)) {
         next();
       } else {
         res.render("status.ejs", {

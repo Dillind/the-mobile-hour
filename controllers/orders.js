@@ -2,6 +2,8 @@ import express from "express";
 import * as OrdersProducts from "../models/orders-products.js";
 import * as Orders from "../models/orders.js";
 import * as Products from "../models/products.js";
+import * as Changelog from "../models/changelog.js";
+import access_control from "../access_control.js";
 
 const orderController = express.Router();
 
@@ -60,11 +62,11 @@ orderController.post("/create_order", (req, res) => {
     const newOrder = Orders.newOrder(
       // new model does not have an ID yet
       null,
-      formData.product_id,
-      formData.customer_first_name,
-      formData.customer_last_name,
-      formData.customer_phone,
-      formData.customer_email,
+      validator.escape(formData.product_id),
+      validator.escape(formData.customer_first_name),
+      validator.escape(formData.customer_last_name),
+      validator.escape(formData.customer_phone),
+      validator.escape(formData.customer_email),
       // all orders are pending by default
       "pending",
       // gets the current date and time in a MySQL friendly format
@@ -73,12 +75,24 @@ orderController.post("/create_order", (req, res) => {
     // Save order to database
     Orders.create(newOrder)
       .then(([result]) => {
-        res.redirect("/order_confirmation?=id" + result.insertId);
+        res.redirect("/order_confirmation?id=" + result.insertId);
       })
       .catch((error) => {
         // Handle errors
         res.status(500).send(`Failed to create order ${error}`);
       });
+
+    // Changelog entry
+    const orderChangelogEntry = Changelog.newChangelog(
+      null,
+      null,
+      req.session.user.staffId,
+      `Order created: ${formData.customer_first_name} ${formData.customer_last_name}`
+    );
+
+    Changelog.create(orderChangelogEntry).catch((error) => {
+      console.log("Failed to add to changelog " + orderChangelogEntry);
+    });
   } else {
     // Handle error caused if no body exists
     res.status(400).send("Missing order details in request body");
@@ -114,14 +128,51 @@ orderController.get("/order_confirmation", (req, res) => {
   }
 });
 
-orderController.get("/order_admin", (req, res) => {
-  res.render("order_admin.ejs");
-});
+orderController.get(
+  "/order_admin",
+  access_control(["manager", "user"]),
+  (req, res) => {
+    let orderStatus = req.query.status;
+    if (!orderStatus) {
+      orderStatus = "pending";
+    }
 
-orderController.get("/order_admin_create", (req, res) => {
-  Products.getAll().then((products) => {
-    res.render("order_admin_create.ejs", { products });
-  });
-});
+    OrdersProducts.getAllByOrderStatus(orderStatus).then((ordersProducts) => {
+      res.render("order_admin.ejs", {
+        ordersProducts,
+        orderStatus,
+        accessRole: req.session.user.accessRole,
+      });
+    });
+  }
+);
+
+orderController.post(
+  "/order_admin",
+  access_control(["manager", "user"]),
+  (req, res) => {
+    const formData = req.body;
+    Orders.updateStatusById(formData.order_id, formData.status).then(
+      ([result]) => {
+        if (result.affectedRows > 0) {
+          res.redirect("/order_admin");
+        }
+      }
+    );
+  }
+);
+
+orderController.get(
+  "/order_admin_create",
+  access_control(["manager", "user"]),
+  (req, res) => {
+    Products.getAll().then((products) => {
+      res.render("order_admin_create.ejs", {
+        products,
+        accessRole: req.session.user.accessRole,
+      });
+    });
+  }
+);
 
 export default orderController;

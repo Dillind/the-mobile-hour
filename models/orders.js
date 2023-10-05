@@ -28,7 +28,7 @@ export function newOrder(
 
 export function create(order) {
   return db_conn.query(
-    `INSERT INTO orders (product_id, customer_first_name, customer_last_name, customer_phone, customer_email, order_status, order_datetime), VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO orders (product_id, customer_first_name, customer_last_name, customer_phone, customer_email, order_status, order_datetime) VALUES (?, ?, ?, ?, ?, ?, ?)`,
     [
       order.product_id,
       order.customer_first_name,

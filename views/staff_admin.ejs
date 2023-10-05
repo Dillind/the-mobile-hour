@@ -6,10 +6,87 @@
   </head>
   <body>
     <!-- Header / nav -->
-    <%- include("partials/admin_navigation.ejs") %>
-    <main>
-      <h1>Staff Admin</h1>
-    </main>
+    <%- include("partials/admin_navigation.ejs", { accessRole }) %>
+    <h1 class="admin-title">Staff Admin</h1>
+    <!-- Order Admin Navigation -->
+    <section class="admin-section">
+      <nav class="order-admin-nav">
+      </nav>
+      <section class="column-4 data-grid">
+        <span class="column-heading">Name</span>
+        <span class="column-heading">Username</span>
+        <span class="column-heading">Role</span>
+        <span class="column-heading"></span>
+        <% for (let staff of allStaff) { %>
+          <span><%= `${staff.first_name} ${staff.last_name}` %></span>
+        <span><%= staff.username %></span>
+        <span><%= staff.access_role %></span>
+        <article class="edit-delete-btns">
+          <a
+            href="/staff_admin?edit_id=<%= staff.id %>"
+            class="button-primary button"
+            >Edit
+          </a>
+          <input type="submit" class="button-primary button" name="action" value="delete">
+        </article>
+        <% } %>
+      </section>
+        <form id="staffEditForm" action="/edit_staff" method="post" class="edit-form">
+          <input type="hidden" name="staff_id" value="<%= editStaff.id %>" />
+          <!-- First Name -->
+          <label for="first-name">First Name:</label>
+          <input
+            type="text"
+            name="first_name"
+            class="create-form-input"
+            value="<%= editStaff.first_name %>"
+
+          />
+          <!-- Last Name -->
+          <label for="last-name">Last Name:</label>
+          <input
+            type="text"
+            name="last_name"
+            class="create-form-input"
+            value="<%= editStaff.last_name %>"
+
+          />
+          <!-- Access Role -->
+          <label for="access-role">Access Role:</label>
+          <select name="access_role" class="create-form-input">
+            <option <%=editStaff.access_role == "manager" ? "selected" : "" %> value="manager">
+                Manager
+            </option>
+            <option <%=editStaff.access_role == "user" ? "selected" : "" %> value="user">
+                User
+            </option>
+        </select>
+          <!-- Username -->
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            name="username"
+            class="create-form-input"
+            value="<%= editStaff.username %>"
+          />
+          <!-- Password -->
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            class="create-form-input"
+            value="<%= editStaff.password %>"
+          />
+          <article class="action-btns">
+            <input type="reset" name="action" value="reset" class="button-primary button">
+            <% if (editStaff.id == "0" ) { %>
+              <input type="submit" name="action" value="create" class="button-primary button" />
+              <% } else { %>
+              <input type="submit" name="action" value="update" class="button-primary button" />
+          </article>
+            <% } %>
+        </form>
+    </section>
     <!--  Footer -->
     <%- include("partials/footer.ejs") %>
   </body>

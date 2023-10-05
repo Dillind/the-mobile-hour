@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head.ejs") %>
+    <title>The Mobile Hour - Checkout</title>
+  </head>
+  <body>
+    <!-- TODO: Header / Nav -->
+    <%- include("partials/header.ejs") %>
+    <main>
+      <section class="checkout-section">
+        <h1 class="admin-title">Checkout</h1>
+        <article class="phone-card-single">
+          <img src="/img/samsung-galaxy-s23.png" alt="<%= product.name %>" />
+          <h2><%= product.name %></h2>
+          <div>
+            <span><%= `$${product.price} `%></span>
+            <span>
+              <% if (product.stock > 0) { %>
+              <span class="stock-available">In Stock</span>
+              <% } else { %>
+              <span class="stock-unavailable">Product Unavailable</span>
+              <% } %>
+            </span>
+          </div>
+          <p><%= product.description %></p>
+        </article>
+        <% if (product.stock > 0) { %>
+        <form action="/create_order" method="post" class="create-form">
+          <article class="form-content">
+            <div class="create-form-header">Customer Details</div>
+            <input type="hidden" name="product_id" value="<%= product.id %>" />
+            <!-- Customer First Name -->
+            <label for="customer-first-name">First Name:</label>
+            <input
+              type="text"
+              name="customer_first_name"
+              class="create-form-input"
+              id="customer-first-name"
+              placeholder="Enter your first name"
+              required
+            />
+            <!-- Customer Last Name -->
+            <label for="customer-last-name">Last Name:</label>
+            <input
+              type="text"
+              name="customer_last_name"
+              class="create-form-input"
+              id="customer-last-name"
+              placeholder="Enter your last name"
+              required
+            />
+            <!-- Customer Phone -->
+            <label for="customer-phone">Phone Number:</label>
+            <input
+              type="tel"
+              name="customer_phone"
+              class="create-form-input"
+              id="customer-phone"
+              placeholder="Enter your phone number"
+              required
+            />
+            <!-- Customer Email -->
+            <label for="customer-email">Email Address:</label>
+            <input
+              type="email"
+              name="customer_email"
+              class="create-form-input"
+              id="customer-email"
+              placeholder="Enter your email address"
+              required
+            />
+            <article class="create-form-buttons">
+              <a
+                href="/product_list"
+                class="button-secondary button"
+                role="button"
+                >Back</a
+              >
+              <input
+                type="submit"
+                value="Pay"
+                class="button-primary button"
+                role="button"
+              />
+              <% } else { %>
+              <article class="create-form-buttons">
+                <a
+                  href="/product_list"
+                  class="button-secondary button"
+                  role="button"
+                  >Back</a
+                >
+              </article>
+              <% } %>
+            </article>
+          </article>
+        </form>
+      </section>
+    </main>
+    <!-- Footer -->
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>

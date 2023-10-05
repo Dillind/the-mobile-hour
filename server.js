@@ -21,7 +21,20 @@ app.use(
 // Setup and use the EJS view engine
 app.set("view engine", "ejs");
 
-// TODO: Setup 404 and root page redirects
+// Setup and use static files middleware
+app.use(express.static("static"));
+
+// Import and use controllers
+import productController from "./controllers/products.js";
+app.use(productController);
+import orderController from "./controllers/orders.js";
+app.use(orderController);
+import staffController from "./controllers/staff.js";
+app.use(staffController);
+
+// Setup 404 and root page redirects
+
+// Home page, about and contact page rendering
 
 app.get("/", (req, res) => {
   res.render("home.ejs");
@@ -34,17 +47,6 @@ app.get("/about", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact.ejs");
 });
-
-// Setup and use static files middleware
-app.use(express.static("static"));
-
-// Import and use controllers
-import productController from "./controllers/products.js";
-app.use(productController);
-import orderController from "./controllers/orders.js";
-app.use(orderController);
-import staffController from "./controllers/staff.js";
-app.use(staffController);
 
 app.listen(port, () => {
   console.log(`Express server started on http://localhost:${port}`);

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head.ejs") %>
+    <title>The Mobile Hour - Mobile Phones</title>
+  </head>
+  <body>
+    <!-- Header / Navigation -->
+    <%- include("partials/header.ejs") %>
+    <main>
+      <article class="product-list-search">
+        <h2 class="product-list-title">Mobile Phones</h2>
+        <form action="product_list" method="get" class="search-form">
+          <input
+            type="text"
+            class="search-form-input"
+            name="search_term"
+            placeholder="Search phones..."
+          />
+          <input type="submit" value="Search" class="search-btn" />
+        </form>
+      </article>
+      <article class="product-list-banner">
+        <h3>Shop Premium Mobile Phones</h3>
+      </article>
+      <section class="phone-list">
+        <% for (const product of products) { %>
+        <article class="phone-card">
+          <img src="/img/samsung-galaxy-s23.png" alt="<%= product.name %>" />
+          <h2><%= product.name %></h2>
+          <div class="phone-card-details">
+            <span class="phone-card-price"><%= `$${product.price} `%></span>
+            <span>
+              <% if (product.stock > 0) { %>
+              <span class="stock-available">In Stock</span>
+              <% } else { %>
+              <span class="stock-unavailable">Out of Stock</span>
+              <% } %>
+            </span>
+          </div>
+          <a
+            href="product_checkout?id=<%= product.id %>"
+            role="button"
+            class="button-primary button"
+            >Buy</a
+          >
+        </article>
+        <% } %>
+      </section>
+    </main>
+    <!--  Footer -->
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>

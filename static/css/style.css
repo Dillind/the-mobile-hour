@@ -15,6 +15,7 @@
 
 /* STAFF CSS */
 @import url("sections/staff_login.css");
+@import url("sections//staff_admin.css");
 
 /* ORDER CSS */
 @import url("sections/order_admin.css");
@@ -55,6 +56,8 @@ main {
   margin-top: 10px;
 }
 
+/* Buttons */
+
 .button {
   padding: 10px;
   margin-top: 10px;
@@ -67,8 +70,9 @@ main {
   text-align: center;
   cursor: pointer;
   height: 38px;
-  max-width: 100px;
+  max-width: 120px;
   width: 100%;
+  text-transform: capitalize;
 }
 
 .button-primary {
@@ -87,6 +91,50 @@ main {
 
 .stock-unavailable {
   color: var(--color-error);
+}
+
+/* GENERAL ADMIN LAYOUT */
+
+.admin-section {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1500px;
+}
+
+.admin-title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Input styling */
+
+textarea {
+  resize: none;
+}
+
+/* Grid Column Styling */
+
+.data-grid {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.column-4 {
+  grid-template-columns: repeat(4, 1fr)
+}
+
+.column-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.column-7 {
+  grid-template-columns: repeat(7, 1fr)
+}
+
+.column-heading {
+  font-weight: 600;
 }
 
 /* media queries */

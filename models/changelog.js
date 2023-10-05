@@ -1,7 +1,12 @@
 import { db_conn } from "../database.js";
 
 export function newChangelog(id, date, user_id, message) {
-  return id, date, user_id, message;
+  return {
+    id,
+    date,
+    user_id,
+    message,
+  };
 }
 
 export function create(changelog) {

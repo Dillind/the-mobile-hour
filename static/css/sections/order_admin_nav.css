@@ -3,17 +3,17 @@
   gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 10px 0;
+  margin: 20px 0;
   padding-bottom: 10px;
   border-bottom: solid 2px var(--black);
 }
 
-.order-admin-section .order-admin-nav a {
-  text-decoration: none;
-  color: var(--black);
+.order-admin-nav a {
   margin: 5px;
+  color: var(--black);
+  text-decoration: none;
 }
 
-.order-admin-section .order-admin-nav a:hover {
+.order-admin-nav a:hover {
   text-decoration: underline 2px var(--primary-color);
 }

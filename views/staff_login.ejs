@@ -8,9 +8,41 @@
     <!-- Header / nav -->
     <%- include("partials/header.ejs") %>
     <main>
-      <h1>Staff Login</h1>
+      <section class="login-section">
+        <form action="/staff_login" method="post" class="login-form">
+          <article class="login-form-content">
+            <div class="login-form-header">Login</div>
+            <!-- Username -->
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              class="login-form-input"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <!-- Password -->
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              class="login-form-input"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <article class="login-form-buttons">
+              <input
+                type="submit"
+                value="Login"
+                class="button-primary button"
+              />
+              <a href="/" class="button-secondary button">Back</a>
+            </article>
+          </article>
+        </form>
+      </section>
     </main>
-    <!--  Footer -->
     <%- include("partials/footer.ejs") %>
+    <!--  Footer -->
   </body>
 </html>

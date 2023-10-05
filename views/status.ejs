@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head.ejs") %>
+    <title>Minute Coffee - Staff Login</title>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <main>
+      <section>
+        <article>
+          <h2><%= status %></h2>
+          <% if (typeof message != "undefined") { %>
+          <p><%= message %></p>
+          <% } %>
+        </article>
+      </section>
+    </main>
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>

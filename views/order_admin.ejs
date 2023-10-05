@@ -6,10 +6,41 @@
   </head>
   <body>
     <!-- Header / nav -->
-    <%- include("partials/admin_navigation.ejs") %>
-    <main>
-      <h1>Order Admin</h1>
-    </main>
+    <%- include("partials/admin_navigation.ejs", { accessRole }) %>
+    <h1 class="admin-title">Order Admin</h1>
+    <!-- Order Admin Navigation -->
+    <section class="admin-section">
+      <%- include("partials/order_admin_nav.ejs") %>
+      <section class="column-4 data-grid">
+        <span class="column-heading">Customer</span>
+        <span class="column-heading">Product Ordered</span>
+        <span class="column-heading">Order Time</span>
+        <span class="column-heading">Order Status</span>
+        <% for (let orderProduct of ordersProducts) { %>
+        <span
+          ><%= `${orderProduct.customer_first_name}
+          ${orderProduct.customer_last_name}` %></span
+        >
+        <span><%= orderProduct.product_name %></span>
+        <span><%= orderProduct.order_datetime.toLocaleString() %></span>
+        <form action="/order_admin" method="post" class="order-update-form">
+          <input
+            type="hidden"
+            name="order_id"
+            value="<%= orderProduct.order_id %>"
+          />
+          <select name="status" class="status-select">
+            <option value="" disabled selected>Select</option>
+            <option value="pending">Pending</option>
+            <option value="packing">Packing</option>
+            <option value="shipped">Shipped</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <input type="submit" value="Update" />
+        </form>
+        <% } %>
+      </section>
+    </section>
     <!--  Footer -->
     <%- include("partials/footer.ejs") %>
   </body>

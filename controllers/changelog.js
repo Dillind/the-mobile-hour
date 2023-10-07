@@ -8,9 +8,9 @@ changelogController.get(
   "/changelog_admin",
   access_control(["manager", "user"]),
   (req, res) => {
-    Changelog.getAll().then((changelog) => {
+    Changelog.getAll().then((changelogs) => {
       res.render("changelog_admin.ejs", {
-        changelog,
+        changelogs,
         accessRole: req.session.user.accessRole,
       });
     });

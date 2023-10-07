@@ -22,7 +22,7 @@ export function create(changelog) {
 export function getAll() {
   return db_conn.query(`SELECT * FROM changelog`).then(([queryResult]) => {
     return queryResult.map((result) => {
-      newChangelog(
+      return newChangelog(
         result.changelog_id,
         result.changelog_date,
         result.changelog_user_id,

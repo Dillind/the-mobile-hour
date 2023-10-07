@@ -2,8 +2,6 @@ import express from "express";
 import access_control from "../access_control.js";
 import * as Products from "../models/products.js";
 import * as ProductsStaff from "../models/products-staff.js";
-import * as ProductFeatures from "../models/products-features.js";
-import * as Features from "../models/feature.js";
 import * as Changelog from "../models/changelog.js";
 
 const productController = express.Router();
@@ -121,15 +119,17 @@ productController.post(
         });
 
       // Changelog entry
-      const productChangelogEntry = Changelog.newChangelog(
+      const productCreatedChangelogEntry = Changelog.newChangelog(
         null,
         null,
         req.session.user.staffId,
         `Product created: ${formData.product_name}`
       );
 
-      Changelog.create(productChangelogEntry).catch((error) => {
-        console.log("Failed to add to changelog " + productChangelogEntry);
+      Changelog.create(productCreatedChangelogEntry).catch((error) => {
+        console.log(
+          "Failed to add to changelog " + productCreatedChangelogEntry
+        );
       });
     } else {
       // Handle error caused if no body exists
@@ -138,55 +138,6 @@ productController.post(
   }
 );
 
-productController.post(
-  "/create_feature",
-  access_control(["manager", "user"]),
-  (req, res) => {
-    if (req.body) {
-      let formData = req.body;
-
-      const newFeature = Features.create(
-        null,
-        formData.feature_weight,
-        formData.feature_dimensions,
-        formData.feature_OS,
-        formData.feature_screensize,
-        formData.feature_resolution,
-        formData.feature_CPU,
-        formData.feature_RAM,
-        formData.feature_storage,
-        formData.feature_battery,
-        formData.feature_rear_camera,
-        formData.feature_front_camera
-      );
-
-      // Save order to database
-      Features.create(newFeature)
-        .then(([result]) => {
-          res.redirect("/product_admin");
-        })
-        .catch((error) => {
-          // Handle errors
-          res.status(500).send(`Failed to create feature ${error}`);
-        });
-
-      // Changelog entry
-      const featureChangelogEntry = Changelog.newChangelog(
-        null,
-        null,
-        req.session.user.staffId,
-        "Feature created"
-      );
-
-      Changelog.create(featureChangelogEntry).catch((error) => {
-        console.log("Failed to add to changelog " + featureChangelogEntry);
-      });
-    } else {
-      // Handle error caused if no body exists
-      res.status(400).send("Missing feature details in request body");
-    }
-  }
-);
 
 productController.get(
   "/product_admin_create",
@@ -228,10 +179,22 @@ productController.post(
         res.redirect("/product_admin");
       });
     } else if (formData.action == "delete") {
-      Products.deleteByID(editedProduct.id).then(([result]) => {
+      Products.deleteById(editedProduct.id).then(([result]) => {
         res.redirect("/product_admin");
       });
     }
+
+    // Changelog entry
+    const productUpdatedChangelogEntry = Changelog.newChangelog(
+      null,
+      null,
+      req.session.user.staffId,
+      `${req.session.user.accessRole} ${formData.action}d product: ${formData.name}`
+    );
+
+    Changelog.create(productUpdatedChangelogEntry).catch((error) => {
+      console.log("Failed to add to changelog " + productUpdatedChangelogEntry);
+    });
   }
 );
 

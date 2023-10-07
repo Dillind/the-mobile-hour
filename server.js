@@ -31,6 +31,10 @@ import orderController from "./controllers/orders.js";
 app.use(orderController);
 import staffController from "./controllers/staff.js";
 app.use(staffController);
+import featureController from "./controllers/features.js";
+app.use(featureController);
+import changelogController from "./controllers/changelog.js";
+app.use(changelogController);
 
 // Setup 404 and root page redirects
 

@@ -145,7 +145,7 @@ staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
     null,
     null,
     req.session.user.staffId,
-    `${req.session.user.accessRole} ${formData.action}d staff member with ID ${editStaff.id} `
+    `${req.session.user.accessRole} ${formData.action}d staff member: ${formData.first_name} ${formData.last_name}`
   );
 
   Changelog.create(staffUpdatedChangelogEntry).catch((error) => {

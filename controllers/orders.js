@@ -83,15 +83,15 @@ orderController.post("/create_order", (req, res) => {
       });
 
     // Changelog entry
-    const orderChangelogEntry = Changelog.newChangelog(
+    const orderCreatedChangelogEntry = Changelog.newChangelog(
       null,
       null,
       req.session.user.staffId,
       `Order created: ${formData.customer_first_name} ${formData.customer_last_name}`
     );
 
-    Changelog.create(orderChangelogEntry).catch((error) => {
-      console.log("Failed to add to changelog " + orderChangelogEntry);
+    Changelog.create(orderCreatedChangelogEntry).catch((error) => {
+      console.log("Failed to add to changelog " + orderCreatedChangelogEntry);
     });
   } else {
     // Handle error caused if no body exists
@@ -159,6 +159,17 @@ orderController.post(
         }
       }
     );
+    // Changelog entry
+    const orderUpdatedChangelogEntry = Changelog.newChangelog(
+      null,
+      null,
+      req.session.user.staffId,
+      `Order ${formData.order_id} status updated to ${formData.status}`
+    );
+
+    Changelog.create(orderUpdatedChangelogEntry).catch((error) => {
+      console.log("Failed to add to changelog " + orderUpdatedChangelogEntry);
+    });
   }
 );
 

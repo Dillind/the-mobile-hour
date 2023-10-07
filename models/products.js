@@ -134,7 +134,7 @@ export function update(product) {
 }
 
 // DELETE
-export function deleteByID(productID) {
+export function deleteById(productID) {
   return db_conn.query(`DELETE FROM products WHERE product_id = ?`, [
     productID,
   ]);

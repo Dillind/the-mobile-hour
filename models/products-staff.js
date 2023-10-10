@@ -39,7 +39,7 @@ export function newProductStaff(
 export function getAll() {
   return db_conn
     .query(
-      `SELECT * FROM products INNER JOIN staff ON products.product_last_updated_by_staff_id = staff.staff_id`
+      `SELECT * FROM products INNER JOIN staff ON products.product_last_updated_by_staff_id = staff.staff_id WHERE product_removed = 0`
     )
     .then(([queryResult]) => {
       return queryResult.map((result) =>

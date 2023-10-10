@@ -1,3 +1,86 @@
 .about-section {
-  min-height: 100vh;
+  margin-top: 60px;
+}
+
+.about-section h1 {
+  text-align: center;
+}
+
+.about-banner-container {
+  display: flex;
+  height: 150px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+  margin-top: 50px;
+}
+
+.about-banner-title {
+  color: var(--primary-color);
+  font-size: 30px;
+  text-align: center;
+}
+
+.about-history-container {
+  margin-top: 50px;
+  max-height: fit-content;
+  max-width: 100%;
+}
+
+.about-history-content {
+  margin-top: 30px;
+  line-height: 20px;
+}
+
+.about-history-content p {
+  margin-top: 20px;
+}
+
+.store-values-container {
+  margin-top: 50px;
+}
+
+.store-values-container h3 {
+  text-align: center;
+}
+
+.store-values-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 80px;
+  margin-top: 30px;
+}
+
+.store-value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-height: 100px;
+  width: 150px;
+}
+
+.store-value h4 {
+  text-align: center;
+}
+
+.store-value img {
+  width: 70px;
+}
+
+@media screen and (max-width: 720px) {
+  .store-values-wrapper {
+    gap: 40px;
+  }
+  .store-value h4 {
+    font-size: 12px;
+  }
+  .store-value img {
+    width: 50px;
+    height: 100%;
+  }
 }

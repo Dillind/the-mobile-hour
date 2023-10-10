@@ -1,4 +1,4 @@
-.order-admin-nav {
+.admin-nav {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -8,12 +8,12 @@
   border-bottom: solid 2px var(--black);
 }
 
-.order-admin-nav a {
+.admin-nav a {
   margin: 5px;
   color: var(--black);
   text-decoration: none;
 }
 
-.order-admin-nav a:hover {
+.admin-nav a:hover {
   text-decoration: underline 2px var(--primary-color);
 }

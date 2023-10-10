@@ -23,7 +23,4 @@
     grid-template-columns: 1fr;
   }
 
-  .column-heading {
-    display: flex;
-  }
 }

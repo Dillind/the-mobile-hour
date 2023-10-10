@@ -8,7 +8,15 @@
 }
 
 .phone-card-single img {
+  max-width: 550px;
   width: 100%;
+}
+
+.phone-card-img {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
 }
 
 .phone-card-single h2 {
@@ -16,7 +24,7 @@
   margin-bottom: 20px;
 }
 
-.phone-card-single div {
+.phone-card-single-content div {
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 18px;
@@ -47,7 +55,7 @@
 
 .create-form-input {
   width: 100%;
-  min-width: 120px;
+  min-width: 150px;
   margin-bottom: 20px;
   margin-top: 10px;
   padding: 10px;

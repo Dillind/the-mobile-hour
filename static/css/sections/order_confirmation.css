@@ -1,16 +1,22 @@
+.phone-card-content {
+  text-align: center;
+}
+
 .phone-card-content span {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 20px;
-  color: var(--primary-color);
-  border: 1px solid var(--black);
   border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
 .phone-card-content h4 {
   margin: 30px 0 10px 0;
   text-transform: uppercase;
+}
+
+.order-confirmation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .order-confirmation-details {

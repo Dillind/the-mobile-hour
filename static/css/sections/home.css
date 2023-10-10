@@ -15,12 +15,16 @@
   line-height: 100px;
 }
 
+.store-guarantee > h2 {
+  font-weight: 800;
+}
+
 .store-guarantee span {
   color: var(--primary-color);
 }
 
 .featured-brands-container {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .featured-brands-title {
@@ -48,7 +52,7 @@
   gap: 30px;
   align-items: center;
   justify-content: center;
-  margin: 30px 0px 30px 0px;
+  margin: 40px 0px 40px 0px;
 }
 
 /* media queries */
@@ -70,6 +74,10 @@
 
   .featured-brands-title {
     font-size: 16px;
+  }
+
+  .featured-brands-container {
+    margin-top: 50px;
   }
 }
 

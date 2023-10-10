@@ -1,6 +1,6 @@
 .edit-form {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
   margin-top: 30px;
   border: 1px solid var(--black);
@@ -14,18 +14,10 @@
   margin-right: auto;
 }
 
-.edit-delete-btns {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-}
-
 .action-btns {
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-items: center;
 
@@ -34,12 +26,7 @@
 /* media queries */
 
 @media screen and (max-width: 700px) {
-  .staff-edit-form{
+  .edit-form{
     grid-template-columns: 1fr;
-  }
-
-  .edit-delete-btns {
-   grid-template-columns: 1fr;
-   gap: 0;
   }
 }

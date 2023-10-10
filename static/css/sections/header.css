@@ -25,7 +25,7 @@
   padding-right: 1rem;
   display: flex;
   list-style: none;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .header-navbar-links ul > li > a {

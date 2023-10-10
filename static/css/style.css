@@ -61,7 +61,6 @@ main {
 .button {
   padding: 10px;
   margin-top: 10px;
-  font-weight: 800;
   border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
@@ -87,10 +86,12 @@ main {
 
 .stock-available {
   color: var(--color-success);
+  font-weight: 600;
 }
 
 .stock-unavailable {
   color: var(--color-error);
+  font-weight: 600;
 }
 
 /* GENERAL ADMIN LAYOUT */
@@ -121,20 +122,40 @@ textarea {
   font-size: 14px;
 }
 
+.column-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .column-4 {
-  grid-template-columns: repeat(4, 1fr)
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .column-5 {
   grid-template-columns: repeat(5, 1fr);
 }
 
+.column-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
 .column-7 {
-  grid-template-columns: repeat(7, 1fr)
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .column-heading {
   font-weight: 600;
 }
 
+.changelog {
+  text-align: center;
+}
+
 /* media queries */
+
+/* media queries */
+
+@media screen and (max-width: 700px) {
+  .changelog {
+    text-align: center;
+  }
+}

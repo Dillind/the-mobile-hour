@@ -45,22 +45,24 @@ export function create(product) {
 // READ
 // Get All
 export function getAll() {
-  return db_conn.query(`SELECT * FROM products`).then(([queryResult]) => {
-    // convert each result into a model object
-    return queryResult.map((result) =>
-      newProduct(
-        result.product_id,
-        result.product_name,
-        result.product_model,
-        result.product_manufacturer,
-        result.product_price,
-        result.product_stock,
-        result.product_description,
-        result.product_last_updated_by_staff_id,
-        result.product_feature_id
-      )
-    );
-  });
+  return db_conn
+    .query(`SELECT * FROM products WHERE product_removed = 0`)
+    .then(([queryResult]) => {
+      // convert each result into a model object
+      return queryResult.map((result) =>
+        newProduct(
+          result.product_id,
+          result.product_name,
+          result.product_model,
+          result.product_manufacturer,
+          result.product_price,
+          result.product_stock,
+          result.product_description,
+          result.product_last_updated_by_staff_id,
+          result.product_feature_id
+        )
+      );
+    });
 }
 
 // Get By Id
@@ -94,7 +96,7 @@ export function getById(productID) {
 export function getBySearch(searchTerm) {
   return db_conn
     .query(
-      `SELECT * FROM products WHERE product_name LIKE ? OR product_description LIKE ?`,
+      `SELECT * FROM products WHERE product_removed = 0 AND (product_name LIKE ? OR product_description LIKE ?)`,
       [`%${searchTerm}%`, `%${searchTerm}%`]
     )
     .then(([queryResult]) => {
@@ -142,7 +144,9 @@ export function updateStockById(productID, difference) {
 
 // DELETE
 export function deleteById(productID) {
-  return db_conn.query(`DELETE FROM products WHERE product_id = ?`, [
-    productID,
-  ]);
+  // this query does not delete the product entirely to prevent errors with other foreign key connections, it just flags them as removed. Thus, it allows us to hide the "deleted" products, while still maintaining referential integrity with the orders table.
+  return db_conn.query(
+    `UPDATE products SET product_removed = 1 WHERE product_id = ?`,
+    [productID]
+  );
 }

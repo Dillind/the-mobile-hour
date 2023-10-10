@@ -4,6 +4,7 @@ import * as Orders from "../models/orders.js";
 import * as Products from "../models/products.js";
 import * as Changelog from "../models/changelog.js";
 import access_control from "../access_control.js";
+import validator from "validator";
 
 const orderController = express.Router();
 
@@ -73,13 +74,25 @@ orderController.post("/create_order", (req, res) => {
       new Date().toISOString().slice(0, 19).replace("T", " ")
     );
     // Save order to database
-    Orders.create(newOrder)
-      .then(([result]) => {
-        res.redirect("/order_confirmation?id=" + result.insertId);
+    Products.updateStockById(formData.product_id, -1)
+      .then(() => {
+        Orders.create(newOrder)
+          .then(([result]) => {
+            res.redirect("/order_confirmation?id=" + result.insertId);
+          })
+          .catch((error) => {
+            res.render("status.ejs", {
+              status: "Failed to create order",
+              message: "Order creation failed, please contact staff support.",
+            });
+          });
       })
       .catch((error) => {
-        // Handle errors
-        res.status(500).send(`Failed to create order ${error}`);
+        res.render("status.ejs", {
+          status: "Failed to update the stock",
+          message:
+            "Order creation failed due to stock update issue, please contact staff support.",
+        });
       });
 
     // Changelog entry
@@ -91,7 +104,10 @@ orderController.post("/create_order", (req, res) => {
     );
 
     Changelog.create(orderCreatedChangelogEntry).catch((error) => {
-      console.log("Failed to add to changelog " + orderCreatedChangelogEntry);
+      res.render("status.ejs", {
+        status: "Failed to create changelog",
+        message: "Changelog creation failed, please contact staff support.",
+      });
     });
   } else {
     // Handle error caused if no body exists

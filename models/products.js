@@ -133,6 +133,13 @@ export function update(product) {
   );
 }
 
+export function updateStockById(productID, difference) {
+  return db_conn.query(
+    `UPDATE products SET product_stock = product_stock + ? WHERE product_id = ?`,
+    [difference, productID]
+  );
+}
+
 // DELETE
 export function deleteById(productID) {
   return db_conn.query(`DELETE FROM products WHERE product_id = ?`, [

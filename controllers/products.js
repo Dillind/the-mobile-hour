@@ -1,5 +1,6 @@
 import express from "express";
 import access_control from "../access_control.js";
+import validator from "validator";
 import * as Products from "../models/products.js";
 import * as ProductsStaff from "../models/products-staff.js";
 import * as Changelog from "../models/changelog.js";
@@ -138,7 +139,6 @@ productController.post(
   }
 );
 
-
 productController.get(
   "/product_admin_create",
   access_control(["manager", "user"]),
@@ -171,17 +171,38 @@ productController.post(
     );
 
     if (formData.action == "create") {
-      Products.create(editedProduct).then(([result]) => {
-        res.redirect("/product_admin");
-      });
+      Products.create(editedProduct)
+        .then(([result]) => {
+          res.redirect("/product_admin");
+        })
+        .catch((error) => {
+          response.render("status.ejs", {
+            status: "Failed to create",
+            message: "Database failed to create the product",
+          });
+        });
     } else if (formData.action == "update") {
-      Products.update(editedProduct).then(([result]) => {
-        res.redirect("/product_admin");
-      });
+      Products.update(editedProduct)
+        .then(([result]) => {
+          res.redirect("/product_admin");
+        })
+        .catch((error) => {
+          response.render("status.ejs", {
+            status: "Failed to update",
+            message: "Database failed to update the product",
+          });
+        });
     } else if (formData.action == "delete") {
-      Products.deleteById(editedProduct.id).then(([result]) => {
-        res.redirect("/product_admin");
-      });
+      Products.deleteById(editedProduct.id)
+        .then(([result]) => {
+          res.redirect("/product_admin");
+        })
+        .catch((error) => {
+          res.render("status.ejs", {
+            status: "Failed to delete",
+            message: "Database failed to delete the product.",
+          });
+        });
     }
 
     // Changelog entry

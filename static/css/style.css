@@ -138,10 +138,6 @@ textarea {
   grid-template-columns: repeat(6, 1fr);
 }
 
-.column-7 {
-  grid-template-columns: repeat(7, 1fr);
-}
-
 .column-heading {
   font-weight: 600;
 }
@@ -150,7 +146,13 @@ textarea {
   text-align: center;
 }
 
-/* media queries */
+/* Status Section Styling */
+
+.status-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* media queries */
 

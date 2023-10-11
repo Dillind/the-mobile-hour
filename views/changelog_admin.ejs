@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head.ejs") %>
+    <title>The Mobile Hour - Changelog Admin</title>
+  </head>
+  <body>
+    <!-- Header / nav -->
+    <%- include("partials/admin_navigation.ejs", { accessRole }) %>
+    <h1 class="admin-title">Changelog Admin</h1>
+    <section class="admin-section">
+      <!-- Order Admin Navigation -->
+      <nav class="admin-nav"></nav>
+      <section class="column-3 data-grid changelog">
+        <span class="column-heading changelog">Action</span>
+        <span class="column-heading changelog">Date Modified</span>
+        <span class="column-heading changelog">Modified By</span>
+        <% for (let changelog of changelogs) { %>
+        <span><%= changelog.message %></span>
+        <span><%= changelog.date.toLocaleString() %></span>
+        <span><%= `User: ${changelog.user_id}` %></span>
+        <% } %>
+      </section>
+    </section>
+    <!--  Footer -->
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>

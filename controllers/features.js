@@ -3,6 +3,7 @@ import access_control from "../access_control.js";
 import * as ProductsFeatures from "../models/products-features.js";
 import * as Features from "../models/features.js";
 import * as Changelog from "../models/changelog.js";
+import validator from "validator";
 
 const featureController = express.Router();
 
@@ -59,22 +60,22 @@ featureController.post(
   access_control(["manager", "user"]),
   (req, res) => {
     if (req.body) {
-      let formData = req.body;
+      const formData = req.body;
 
       const newFeature = Features.newFeature(
         null,
-        formData.feature_color,
-        formData.feature_weight,
-        formData.feature_dimensions,
-        formData.feature_OS,
-        formData.feature_screensize,
-        formData.feature_resolution,
-        formData.feature_CPU,
-        formData.feature_RAM,
-        formData.feature_storage,
-        formData.feature_battery,
-        formData.feature_rear_camera,
-        formData.feature_front_camera
+        validator.escape(formData.feature_color),
+        validator.escape(formData.feature_weight),
+        validator.escape(formData.feature_dimensions),
+        validator.escape(formData.feature_OS),
+        validator.escape(formData.feature_screensize),
+        validator.escape(formData.feature_resolution),
+        validator.escape(formData.feature_CPU),
+        validator.escape(formData.feature_RAM),
+        validator.escape(formData.feature_storage),
+        validator.escape(formData.feature_battery),
+        validator.escape(formData.feature_rear_camera),
+        validator.escape(formData.feature_front_camera)
       );
 
       // Save order to database
@@ -125,19 +126,19 @@ featureController.post(
     const formData = req.body;
 
     const editedFeature = Features.newFeature(
-      formData.feature_id,
-      formData.color,
-      formData.weight,
-      formData.dimensions,
-      formData.OS,
-      formData.screensize,
-      formData.resolution,
-      formData.CPU,
-      formData.RAM,
-      formData.storage,
-      formData.battery,
-      formData.rear_camera,
-      formData.front_camera
+      validator.escape(formData.feature_id),
+      validator.escape(formData.color),
+      validator.escape(formData.weight),
+      validator.escape(formData.dimensions),
+      validator.escape(formData.OS),
+      validator.escape(formData.screensize),
+      validator.escape(formData.resolution),
+      validator.escape(formData.CPU),
+      validator.escape(formData.RAM),
+      validator.escape(formData.storage),
+      validator.escape(formData.battery),
+      validator.escape(formData.rear_camera),
+      validator.escape(formData.front_camera)
     );
 
     if (formData.action == "create") {

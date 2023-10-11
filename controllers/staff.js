@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import express from "express";
 import access_control from "../access_control.js";
+import validator from "validator";
 
 import * as Staff from "../models/staff.js";
 import * as Changelog from "../models/changelog.js";
@@ -81,15 +82,16 @@ staffController.get("/staff_admin", access_control(["manager"]), (req, res) => {
   }
 });
 
-// need to look into more to understand.
 staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
   const formData = req.body;
 
   if (!/[a-zA-Z-]{2,}/.test(formData.first_name)) {
+    // show the error
     res.render("status.ejs", {
       status: "Invalid first name",
       message: "First name must be letters",
     });
+    // and stop here
     return;
   }
 
@@ -112,11 +114,11 @@ staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
 
   // Create a staff model object to represent the staff member submitted
   const editStaff = Staff.newStaff(
-    formData.staff_id,
-    formData.first_name,
-    formData.last_name,
-    formData.access_role,
-    formData.username,
+    validator.escape(formData.staff_id),
+    validator.escape(formData.first_name),
+    validator.escape(formData.last_name),
+    validator.escape(formData.access_role),
+    validator.escape(formData.username),
     formData.password
   );
 
@@ -135,9 +137,16 @@ staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
       res.redirect("/staff_admin");
     });
   } else if (formData.action == "delete") {
-    Staff.deleteById(editStaff.id).then(([result]) => {
-      res.redirect("/staff_admin");
-    });
+    Staff.deleteById(editStaff.id)
+      .then(([result]) => {
+        res.redirect("/staff_admin");
+      })
+      .catch((error) => {
+        res.render("status.ejs", {
+          status: "Failed to delete",
+          message: "Database failed to delete the staff member.",
+        });
+      });
   }
 
   // Changelog entry

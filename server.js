@@ -36,7 +36,11 @@ app.use(featureController);
 import changelogController from "./controllers/changelog.js";
 app.use(changelogController);
 
-// Setup 404 and root page redirects
+// Redirect request to root to the product list page
+
+app.get("/", (req, res) => {
+  res.status(301).redirect("/product_list");
+});
 
 // Home page, about and contact page rendering
 
@@ -52,6 +56,7 @@ app.get("/contact", (req, res) => {
   res.render("contact.ejs");
 });
 
+// Start listening for requests
 app.listen(port, () => {
   console.log(`Express server started on http://localhost:${port}`);
 });

@@ -5,6 +5,7 @@
 .phone-card-single {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .phone-card-single img {
@@ -24,6 +25,14 @@
   margin-bottom: 20px;
 }
 
+.phone-card-single p {
+  max-width: 600px;
+  line-height: 1.2;
+}
+
+.phone-card-single-content {
+  text-align: center;
+}
 .phone-card-single-content div {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -34,8 +43,9 @@
   margin-bottom: 30px;
 }
 
-.phone-card-single p {
-  line-height: 1.2;
+.phone-card-single-content h4 {
+  margin: 30px 0px 10px 0;
+  text-transform: uppercase;
 }
 
 .create-form {

@@ -11,19 +11,24 @@
       <section class="checkout-section">
         <h1 class="admin-title">Checkout</h1>
         <article class="phone-card-single">
-          <img src="/img/samsung-galaxy-s23.png" alt="<%= product.name %>" />
-          <h2><%= product.name %></h2>
-          <div>
-            <span><%= `$${product.price} `%></span>
-            <span>
-              <% if (product.stock > 0) { %>
-              <span class="stock-available">In Stock</span>
-              <% } else { %>
-              <span class="stock-unavailable">Product Unavailable</span>
-              <% } %>
-            </span>
+          <div class="phone-card-img">
+            <img src="/img/samsung-galaxy-s23.png" alt="<%= product.name %>" />
           </div>
-          <p><%= product.description %></p>
+          <div class="phone-card-single-content">
+            <h2><%= product.name %></h2>
+            <div class="price-stock-details">
+              <span><%= `$${product.price} `%></span>
+              <span>
+                <% if (product.stock > 0) { %>
+                <span class="stock-available">In Stock</span>
+                <% } else { %>
+                <span class="stock-unavailable">Product Unavailable</span>
+                <% } %>
+              </span>
+            </div>
+            <h4>Description</h4>
+            <p><%= product.description %></p>
+          </div>
         </article>
         <% if (product.stock > 0) { %>
         <form action="/create_order" method="post" class="create-form">
@@ -37,7 +42,7 @@
               name="customer_first_name"
               class="create-form-input"
               id="customer-first-name"
-              placeholder="Enter your first name"
+              placeholder="Enter your first name (e.g. John)"
               required
             />
             <!-- Customer Last Name -->
@@ -47,7 +52,7 @@
               name="customer_last_name"
               class="create-form-input"
               id="customer-last-name"
-              placeholder="Enter your last name"
+              placeholder="Enter your last name (e.g. Smith)"
               required
             />
             <!-- Customer Phone -->
@@ -57,7 +62,7 @@
               name="customer_phone"
               class="create-form-input"
               id="customer-phone"
-              placeholder="Enter your phone number"
+              placeholder="Enter your phone number (e.g. 0456 123 456)"
               required
             />
             <!-- Customer Email -->
@@ -67,7 +72,7 @@
               name="customer_email"
               class="create-form-input"
               id="customer-email"
-              placeholder="Enter your email address"
+              placeholder="Enter your email address (e.g. john.smith@gmail.com)"
               required
             />
             <article class="create-form-buttons">
@@ -84,13 +89,14 @@
                 role="button"
               />
               <% } else { %>
-              <article class="create-form-buttons">
+              <article class="create-form-buttons center">
                 <a
                   href="/product_list"
                   class="button-secondary button"
                   role="button"
                   >Back</a
                 >
+                <a href="/" class="button-primary button" role="button">Home</a>
               </article>
               <% } %>
             </article>

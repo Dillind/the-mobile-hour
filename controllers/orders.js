@@ -46,7 +46,7 @@ orderController.post("/create_order", (req, res) => {
     ) {
       res.render("status.ejs", {
         status: "Invalid phone number",
-        message: "Please enter a valid phone number",
+        message: "Please enter a valid Australian phone number",
       });
       return;
     }
@@ -96,22 +96,20 @@ orderController.post("/create_order", (req, res) => {
       });
 
     // Changelog entry
-    const orderCreatedChangelogEntry = Changelog.newChangelog(
-      null,
-      null,
-      req.session.user.staffId,
-      `Order created: ${formData.customer_first_name} ${formData.customer_last_name}`
-    );
-
-    Changelog.create(orderCreatedChangelogEntry).catch((error) => {
-      res.render("status.ejs", {
-        status: "Failed to create changelog",
-        message: "Changelog creation failed, please contact staff support.",
+    if (req.session.user && req.session.user.staffId) {
+      const orderCreatedChangelogEntry = Changelog.newChangelog(
+        null,
+        null,
+        req.session.user.staffId,
+        `Order created: ${formData.customer_first_name} ${formData.customer_last_name}`
+      );
+      Changelog.create(orderCreatedChangelogEntry).catch((error) => {
+        res.render("status.ejs", {
+          status: "Failed to create changelog",
+          message: "Changelog creation failed, please contact staff support.",
+        });
       });
-    });
-  } else {
-    // Handle error caused if no body exists
-    res.status(400).send("Missing order details in request body");
+    }
   }
 });
 

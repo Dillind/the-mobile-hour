@@ -10,7 +10,7 @@
     <h1 class="admin-title">Staff Admin</h1>
     <!-- Order Admin Navigation -->
     <section class="admin-section">
-      <nav class="order-admin-nav">
+      <nav class="admin-nav">
       </nav>
       <section class="column-4 data-grid">
         <span class="column-heading">Name</span>
@@ -21,17 +21,14 @@
           <span><%= `${staff.first_name} ${staff.last_name}` %></span>
         <span><%= staff.username %></span>
         <span><%= staff.access_role %></span>
-        <article class="edit-delete-btns">
           <a
             href="/staff_admin?edit_id=<%= staff.id %>"
             class="button-primary button"
             >Edit
           </a>
-          <input type="submit" class="button-primary button" name="action" value="delete">
-        </article>
         <% } %>
       </section>
-        <form id="staffEditForm" action="/edit_staff" method="post" class="edit-form">
+        <form action="/edit_staff" method="post" class="edit-form">
           <input type="hidden" name="staff_id" value="<%= editStaff.id %>" />
           <!-- First Name -->
           <label for="first-name">First Name:</label>
@@ -78,11 +75,12 @@
             value="<%= editStaff.password %>"
           />
           <article class="action-btns">
-            <input type="reset" name="action" value="reset" class="button-primary button">
+            <input type="reset" name="action" id="reset" value="reset" class="button-primary button">
             <% if (editStaff.id == "0" ) { %>
-              <input type="submit" name="action" value="create" class="button-primary button" />
+              <input type="submit" name="action" id="create" value="create" class="button-primary button" />
               <% } else { %>
-              <input type="submit" name="action" value="update" class="button-primary button" />
+              <input type="submit" name="action" id="update" value="update" class="button-primary button" />
+              <input type="submit" id="delete" class="button-primary button" name="action" value="delete">
           </article>
             <% } %>
         </form>

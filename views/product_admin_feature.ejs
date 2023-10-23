@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head.ejs") %>
+    <title>The Mobile Hour - Feature Admin</title>
+  </head>
+  <body>
+    <!-- Header / nav -->
+    <%- include("partials/admin_navigation.ejs", { accessRole }) %>
+    <h1 class="admin-title">Feature Admin</h1>
+    <section class="admin-section">
+      <nav class="admin-nav">
+        <a href="/product_admin">View Products</a>
+        <a href="/product_admin_create">Create Product</a>
+        <a href="/product_admin_feature">View Features</a>
+        <a href="/product_admin_create_feature">Create Feature</a>
+      </nav>
+      <section class="column-5 data-grid">
+        <span class="column-heading">Feature ID</span>
+        <!-- Feature OS -->
+        <span class="column-heading">OS</span>
+        <!-- Feature Colour -->
+        <span class="column-heading">Colour</span>
+        <!-- Feature Weight -->
+        <!-- Updated By -->
+        <span class="column-heading">Updated By</span>
+        <!-- Edit Btn-->
+        <span></span>
+        <!-- COMMENT FOR JASPER: When I create a new feature, the new feature does not appear on this list - how do i fix this? -->
+        <% for (let productFeature of productsFeatures) { %>
+        <span><%= productFeature.feature_id %></span>
+        <span><%= productFeature.feature_OS %></span>
+        <span><%= productFeature.feature_color %></span>
+        <span><%= productFeature.product_last_updated_by_staff_id%></span>
+        <a
+          href="/product_admin_feature?edit_id=<%= productFeature.feature_id %>"
+          class="button-primary button"
+          >Edit
+        </a>
+        <% } %>
+      </section>
+      <form action="/edit_feature" method="post" class="edit-form">
+        <input type="hidden" name="feature_id" value="<%= editFeature.id %>" />
+
+        <!-- Feature Colour -->
+        <label for="color">Colour:</label>
+        <input
+          type="text"
+          name="color"
+          class="create-form-input"
+          value="<%= editFeature.color %>"
+        />
+
+        <!-- Feature Weight -->
+        <label for="weight">Weight:</label>
+        <input
+          type="text"
+          name="weight"
+          class="create-form-input"
+          value="<%= editFeature.weight %>"
+        />
+
+        <!-- Feature Dimensions -->
+        <label for="dimensions">Dimensions:</label>
+        <input
+          type="text"
+          name="dimensions"
+          class="create-form-input"
+          value="<%= editFeature.dimensions %>"
+        />
+
+        <!-- Feature OS -->
+        <label for="OS">OS:</label>
+        <input
+          type="text"
+          name="OS"
+          class="create-form-input"
+          value="<%= editFeature.OS %>"
+        />
+
+        <!-- Feature Screensize -->
+        <label for="screensize">Screensize:</label>
+        <input
+          type="text"
+          name="screensize"
+          class="create-form-input"
+          value="<%= editFeature.screensize %>"
+        />
+
+        <!-- Feature Resolution -->
+        <label for="resolution">Resolution:</label>
+        <input
+          type="text"
+          name="resolution"
+          class="create-form-input"
+          value="<%= editFeature.resolution %>"
+        />
+
+        <!-- Feature CPU -->
+        <label for="CPU">CPU:</label>
+        <input
+          type="text"
+          name="CPU"
+          class="create-form-input"
+          value="<%= editFeature.CPU %>"
+        />
+
+        <!-- Feature RAM -->
+        <label for="RAM">RAM:</label>
+        <input
+          type="text"
+          name="RAM"
+          class="create-form-input"
+          value="<%= editFeature.RAM %>"
+        />
+
+        <!-- Feature Storage -->
+        <label for="storage">Storage:</label>
+        <input
+          type="text"
+          name="storage"
+          class="create-form-input"
+          value="<%= editFeature.storage %>"
+        />
+
+        <!-- Feature Battery -->
+        <label for="battery">Battery:</label>
+        <input
+          type="text"
+          name="battery"
+          class="create-form-input"
+          value="<%= editFeature.battery %>"
+        />
+
+        <!-- Feature Rear Camera -->
+        <label for="rear_camera">Rear Camera:</label>
+        <input
+          type="text"
+          name="rear_camera"
+          class="create-form-input"
+          value="<%= editFeature.rear_camera %>"
+        />
+
+        <!-- Feature Front Camera -->
+        <label for="front_camera">Front Camera:</label>
+        <input
+          type="text"
+          name="front_camera"
+          class="create-form-input"
+          value="<%= editFeature.front_camera %>"
+        />
+        <article class="action-btns">
+          <input
+            type="submit"
+            name="action"
+            value="update"
+            class="button-primary button"
+          />
+          <% if (!editFeature.id == "0" ) { %>
+          <input
+            type="submit"
+            class="button-primary button"
+            name="action"
+            value="delete"
+          />
+          <% } %>
+        </article>
+      </form>
+    </section>
+    <!--  Footer -->
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>

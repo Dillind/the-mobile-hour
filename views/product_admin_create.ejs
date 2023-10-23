@@ -10,9 +10,11 @@
     <h1 class="admin-title">Create Product</h1>
     <section class="admin-section">
       <!-- Order Admin Navigation -->
-      <nav class="order-admin-nav">
+      <nav class="admin-nav">
         <a href="/product_admin">View Products</a>
         <a href="/product_admin_create">Create Product</a>
+        <a href="/product_admin_feature">View Features</a>
+        <a href="/product_admin_create_feature">Create Feature</a>
       </nav>
       <form action="/create_product" method="post" class="create-form">
         <!-- Product Name -->
@@ -72,6 +74,7 @@
         ></textarea>
 
         <!-- Product Feature ID -->
+        <!-- COMMENT FOR JASPER: This is causing me issues and not displaying all the features from the feature table, only the features that are connected to an existing product - how do i fix this? -->
         <label for="feature-id">Feature ID:</label>
         <select name="product_feature_id" class="create-form-input">
           <% for (let productStaff of productsStaff) { %>
@@ -82,6 +85,13 @@
           <% } %>
         </select>
 
+        <input
+          type="reset"
+          name="action"
+          id="reset"
+          value="reset"
+          class="button-primary button"
+        />
         <input
           type="submit"
           value="Create Product"

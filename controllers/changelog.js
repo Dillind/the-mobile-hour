@@ -6,7 +6,7 @@ const changelogController = express.Router();
 
 changelogController.get(
   "/changelog_admin",
-  access_control(["manager", "user"]),
+  access_control(["manager"]),
   (req, res) => {
     Changelog.getAll().then((changelogs) => {
       res.render("changelog_admin.ejs", {

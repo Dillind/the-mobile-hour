@@ -1,6 +1,5 @@
 import express from "express";
 import access_control from "../access_control.js";
-import * as ProductsFeatures from "../models/products-features.js";
 import * as Features from "../models/features.js";
 import * as Changelog from "../models/changelog.js";
 import validator from "validator";
@@ -11,14 +10,14 @@ featureController.get(
   "/product_admin_feature",
   access_control(["manager", "user"]),
   (req, res) => {
-    const editID = req.query.edit_id;
-    if (editID) {
-      Features.getById(editID)
+    const editId = req.query.edit_id;
+    if (editId) {
+      Features.getById(editId)
         .then((editFeature) => {
-          ProductsFeatures.getAll().then((productsFeatures) => {
+          Features.getAll().then((features) => {
             res.render("product_admin_feature.ejs", {
               editFeature,
-              productsFeatures,
+              features,
               accessRole: req.session.user.accessRole,
             });
           });
@@ -26,13 +25,13 @@ featureController.get(
         .catch((error) => {
           res.render("status.ejs", {
             status: "Edit feature not found",
-            message: error,
+            message: "The edited feature could not be found in the system.",
           });
         });
     } else {
-      ProductsFeatures.getAll().then((productsFeatures) => {
+      Features.getAll().then((features) => {
         res.render("product_admin_feature.ejs", {
-          productsFeatures,
+          features,
           editFeature: Features.newFeature(
             0,
             "",
@@ -142,17 +141,38 @@ featureController.post(
     );
 
     if (formData.action == "create") {
-      Features.create(editedFeature).then(([result]) => {
-        res.redirect("/product_admin_create_feature");
-      });
+      Features.create(editedFeature)
+        .then(([result]) => {
+          res.redirect("/product_admin_create_feature");
+        })
+        .catch((error) => {
+          res.render("status.ejs", {
+            status: "Failed to create",
+            message: "Database failed to create the feature",
+          });
+        });
     } else if (formData.action == "update") {
-      Features.update(editedFeature).then(([result]) => {
-        res.redirect("/product_admin_feature");
-      });
+      Features.update(editedFeature)
+        .then(([result]) => {
+          res.redirect("/product_admin_feature");
+        })
+        .catch((error) => {
+          res.render("status.ejs", {
+            status: "Failed to update",
+            message: "Database failed to update the feature",
+          });
+        });
     } else if (formData.action == "delete") {
-      Features.deleteById(editedFeature.id).then(([result]) => {
-        res.redirect("/product_admin_feature");
-      });
+      Features.deleteById(editedFeature.id)
+        .then(([result]) => {
+          res.redirect("/product_admin_feature");
+        })
+        .catch((error) => {
+          res.render("status.ejs", {
+            status: "Failed to delete",
+            message: "Database failed to delete the feature",
+          });
+        });
     }
 
     // Changelog entry

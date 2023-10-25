@@ -1,5 +1,3 @@
-console.log("Javascript file loaded!");
-
 const menuToggleButton = document.getElementById("menu-toggle-button");
 
 const navBarLinks = document.querySelector(".navbar-links");

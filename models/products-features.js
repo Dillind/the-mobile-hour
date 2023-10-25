@@ -53,7 +53,7 @@ export function newProductFeature(
 export function getAll() {
   return db_conn
     .query(
-      `SELECT * FROM products INNER JOIN feature ON products.product_feature_id = feature.feature_id`
+      `SELECT * FROM products INNER JOIN feature ON products.product_feature_id = feature.feature_id WHERE feature_removed = 0`
     )
     .then(([queryResult]) => {
       return queryResult.map((result) =>

@@ -96,8 +96,8 @@ export function getById(productID) {
 export function getBySearch(searchTerm) {
   return db_conn
     .query(
-      `SELECT * FROM products WHERE product_removed = 0 AND (product_name LIKE ? OR product_description LIKE ?)`,
-      [`%${searchTerm}%`, `%${searchTerm}%`]
+      `SELECT * FROM products WHERE product_removed = 0 AND (product_name LIKE ? OR product_description LIKE ? OR product_price LIKE ?)`,
+      [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`]
     )
     .then(([queryResult]) => {
       // convert each result into a model object

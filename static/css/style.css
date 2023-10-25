@@ -84,6 +84,7 @@ main {
   color: var(--dark-grey);
 }
 
+/* general classes for formatting */
 .stock-available {
   color: var(--color-success);
   font-weight: 600;
@@ -92,6 +93,12 @@ main {
 .stock-unavailable {
   color: var(--color-error);
   font-weight: 600;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* GENERAL ADMIN LAYOUT */

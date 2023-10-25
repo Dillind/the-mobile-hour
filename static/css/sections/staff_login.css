@@ -1,7 +1,7 @@
 .login-section {
   display: grid;
   place-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 .login-form {
   max-width: 500px;

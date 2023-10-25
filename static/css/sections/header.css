@@ -21,10 +21,10 @@
 
 .navbar-links ul {
   margin: 0;
-  padding-right: 1rem;
   display: flex;
   list-style: none;
   gap: 1rem;
+  padding: 10px;
 }
 
 .navbar-links ul > li > a {

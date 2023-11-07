@@ -3,6 +3,7 @@ import access_control from "../access_control.js";
 import validator from "validator";
 import * as Products from "../models/products.js";
 import * as ProductsStaff from "../models/products-staff.js";
+import * as Features from "../models/features.js";
 import * as Changelog from "../models/changelog.js";
 
 const productController = express.Router();
@@ -96,17 +97,61 @@ productController.post(
     if (req.body) {
       let formData = req.body;
 
+      // Validate data formats
+      // product name
+      if (!/[a-zA-Z-]{2,}/.test(formData.product_name)) {
+        res.render("status.ejs", {
+          status: "Invalid product name",
+          message: "Product name must be letters",
+        });
+        return;
+      }
+      // product model
+      if (!/[a-zA-Z-]{2,}/.test(formData.product_model)) {
+        res.render("status.ejs", {
+          status: "Invalid product model name",
+          message: "Product model must be letters",
+        });
+        return;
+      }
+      // product manufacturer
+      if (!/[a-zA-Z-]{2,}/.test(formData.product_manufacturer)) {
+        res.render("status.ejs", {
+          status: "Invalid product manufacturer name",
+          message: "Product manufacturer must be letters",
+        });
+        return;
+      }
+      // product price
+      if (!/^\d+(\.\d{1,2})?$/.test(formData.product_price)) {
+        res.render("status.ejs", {
+          status: "Invalid product price",
+          message:
+            "Product price must be a positive number with up to two decimal places.",
+        });
+        return;
+      }
+      // product stock
+      if (!/^\d+$/.test(formData.product_stock)) {
+        res.render("status.ejs", {
+          status: "Invalid product stock",
+          message: "Product stock must be a non-negative integer.",
+        });
+        return;
+      }
+
+      // sanitise data formats
       const newProduct = Products.newProduct(
         // new model does not have an ID yet
         null,
-        formData.product_name,
-        formData.product_model,
-        formData.product_manufacturer,
-        formData.product_price,
-        formData.product_stock,
-        formData.product_description,
+        validator.escape(formData.product_name),
+        validator.escape(formData.product_model),
+        validator.escape(formData.product_manufacturer),
+        validator.escape(formData.product_price),
+        validator.escape(formData.product_stock),
+        validator.escape(formData.product_description),
         req.session.user.staffId,
-        formData.product_feature_id
+        validator.escape(formData.product_feature_id)
       );
 
       // Save order to database
@@ -143,9 +188,9 @@ productController.get(
   "/product_admin_create",
   access_control(["manager", "user"]),
   (req, res) => {
-    ProductsStaff.getAll().then((productsStaff) => {
+    Features.getAll().then((features) => {
       res.render("product_admin_create.ejs", {
-        productsStaff,
+        features,
         accessRole: req.session.user.accessRole,
       });
     });
@@ -158,16 +203,59 @@ productController.post(
   (req, res) => {
     const formData = req.body;
 
+    // Validate data formats
+    // product name
+    if (!/[a-zA-Z-]{2,}/.test(formData.name)) {
+      res.render("status.ejs", {
+        status: "Invalid product name",
+        message: "Product name must be letters",
+      });
+      return;
+    }
+    // product model
+    if (!/[a-zA-Z-]{2,}/.test(formData.model)) {
+      res.render("status.ejs", {
+        status: "Invalid product model name",
+        message: "Product model must be letters",
+      });
+      return;
+    }
+    // product manufacturer
+    if (!/[a-zA-Z-]{2,}/.test(formData.product_manufacturer)) {
+      res.render("status.ejs", {
+        status: "Invalid product manufacturer name",
+        message: "Product manufacturer must be letters",
+      });
+      return;
+    }
+    // product price
+    if (!/^\d+(\.\d{1,2})?$/.test(formData.price)) {
+      res.render("status.ejs", {
+        status: "Invalid product price",
+        message:
+          "Product price must be a positive number with up to two decimal places.",
+      });
+      return;
+    }
+    // product stock
+    if (!/^\d+$/.test(formData.stock)) {
+      res.render("status.ejs", {
+        status: "Invalid product stock",
+        message: "Product stock must be a non-negative integer.",
+      });
+      return;
+    }
+
     const editedProduct = Products.newProduct(
-      formData.product_id,
-      formData.name,
-      formData.model,
-      formData.manufacturer,
-      formData.price,
-      formData.stock,
-      formData.description,
+      validator.escape(formData.product_id),
+      validator.escape(formData.name),
+      validator.escape(formData.model),
+      validator.escape(formData.manufacturer),
+      validator.escape(formData.price),
+      validator.escape(formData.stock),
+      validator.escape(formData.description),
       req.session.user.staffId,
-      formData.feature_id
+      validator.escape(formData.feature_id)
     );
 
     if (formData.action == "create") {
@@ -176,7 +264,7 @@ productController.post(
           res.redirect("/product_admin");
         })
         .catch((error) => {
-          response.render("status.ejs", {
+          res.render("status.ejs", {
             status: "Failed to create",
             message: "Database failed to create the product",
           });
@@ -187,7 +275,7 @@ productController.post(
           res.redirect("/product_admin");
         })
         .catch((error) => {
-          response.render("status.ejs", {
+          res.render("status.ejs", {
             status: "Failed to update",
             message: "Database failed to update the product",
           });

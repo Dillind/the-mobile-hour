@@ -82,9 +82,11 @@ staffController.get("/staff_admin", access_control(["manager"]), (req, res) => {
   }
 });
 
+// validate data formats
 staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
   const formData = req.body;
 
+  // first name
   if (!/[a-zA-Z-]{2,}/.test(formData.first_name)) {
     // show the error
     res.render("status.ejs", {
@@ -94,7 +96,7 @@ staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
     // and stop here
     return;
   }
-
+  // last name
   if (!/[a-zA-Z-]{2,}/.test(formData.last_name)) {
     res.render("status.ejs", {
       status: "Invalid last name",
@@ -103,6 +105,16 @@ staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
     return;
   }
 
+  // username
+  if (!/[a-zA-Z-]{2,}/.test(formData.username)) {
+    res.render("status.ejs", {
+      status: "Invalid username",
+      message: "Username must be letters",
+    });
+    return;
+  }
+
+  // password
   if (!/[a-zA-Z0-9-]{6,}/.test(formData.password)) {
     res.render("status.ejs", {
       status: "Invalid password",
@@ -119,6 +131,7 @@ staffController.post("/edit_staff", access_control(["manager"]), (req, res) => {
     validator.escape(formData.last_name),
     validator.escape(formData.access_role),
     validator.escape(formData.username),
+    // password is hashed
     formData.password
   );
 

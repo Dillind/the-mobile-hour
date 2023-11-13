@@ -57,26 +57,28 @@ export function create(feature) {
 // READ
 // Get All
 export function getAll() {
-  return db_conn.query(`SELECT * FROM feature`).then(([queryResult]) => {
-    // convert each result into a model object
-    return queryResult.map((result) =>
-      newFeature(
-        result.feature_id,
-        result.feature_color,
-        result.feature_weight,
-        result.feature_dimensions,
-        result.feature_OS,
-        result.feature_screensize,
-        result.feature_resolution,
-        result.feature_CPU,
-        result.feature_RAM,
-        result.feature_storage,
-        result.feature_battery,
-        result.feature_rear_camera,
-        result.feature_front_camera
-      )
-    );
-  });
+  return db_conn
+    .query(`SELECT * FROM feature WHERE feature_removed = 0`)
+    .then(([queryResult]) => {
+      // convert each result into a model object
+      return queryResult.map((result) =>
+        newFeature(
+          result.feature_id,
+          result.feature_color,
+          result.feature_weight,
+          result.feature_dimensions,
+          result.feature_OS,
+          result.feature_screensize,
+          result.feature_resolution,
+          result.feature_CPU,
+          result.feature_RAM,
+          result.feature_storage,
+          result.feature_battery,
+          result.feature_rear_camera,
+          result.feature_front_camera
+        )
+      );
+    });
 }
 
 // Get By Id
@@ -134,5 +136,8 @@ export function update(feature) {
 
 // DELETE
 export function deleteById(featureId) {
-  return db_conn.query(`DELETE FROM feature WHERE feature_id = ?`, [featureId]);
+  return db_conn.query(
+    `UPDATE feature SET feature_removed = 1 WHERE feature_id = ?`,
+    [featureId]
+  );
 }

@@ -62,10 +62,13 @@ productController.get(
       Products.getById(editID)
         .then((editProduct) => {
           ProductsStaff.getAll().then((productsStaff) => {
-            res.render("product_admin.ejs", {
-              editProduct,
-              productsStaff,
-              accessRole: req.session.user.accessRole,
+            Features.getAll().then((features) => {
+              res.render("product_admin.ejs", {
+                editProduct,
+                features,
+                productsStaff,
+                accessRole: req.session.user.accessRole,
+              });
             });
           });
         })
@@ -77,11 +80,14 @@ productController.get(
         });
     } else {
       ProductsStaff.getAll().then((productsStaff) => {
-        res.render("product_admin.ejs", {
-          productsStaff,
-          // id, name, model, manufacturer, price, stock, description, staff_id, feature_id
-          editProduct: Products.newProduct(0, "", "", "", 0, 0, "", 0, 0),
-          accessRole: req.session.user.accessRole,
+        Features.getAll().then((features) => {
+          res.render("product_admin.ejs", {
+            productsStaff,
+            features,
+            // id, name, model, manufacturer, price, stock, description, staff_id, feature_id
+            editProduct: Products.newProduct(0, "", "", "", 0, 0, "", 0, 0),
+            accessRole: req.session.user.accessRole,
+          });
         });
       });
     }
@@ -96,7 +102,6 @@ productController.post(
     // Check that we receive form data
     if (req.body) {
       let formData = req.body;
-
       // Validate data formats
       // product name
       if (!/[a-zA-Z-]{2,}/.test(formData.product_name)) {
@@ -151,7 +156,7 @@ productController.post(
         validator.escape(formData.product_stock),
         validator.escape(formData.product_description),
         req.session.user.staffId,
-        validator.escape(formData.product_feature_id)
+        formData.product_feature_id
       );
 
       // Save order to database

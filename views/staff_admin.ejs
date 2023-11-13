@@ -28,6 +28,8 @@
           </a>
         <% } %>
       </section>
+      <article class="form-container">
+
         <form action="/edit_staff" method="post" class="edit-form">
           <input type="hidden" name="staff_id" value="<%= editStaff.id %>" />
           <!-- First Name -->
@@ -84,6 +86,7 @@
           </article>
             <% } %>
         </form>
+      </article>
     </section>
     <!--  Footer -->
     <%- include("partials/footer.ejs") %>

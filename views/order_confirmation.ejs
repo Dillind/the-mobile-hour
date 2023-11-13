@@ -8,13 +8,15 @@
     <!-- Header / nav -->
     <%- include("partials/header.ejs") %>
     <main>
-      <section class="order-confirmation-layout">
+      <section class="order-confirmation-section">
         <h1 class="admin-title">Order Tracking</h1>
         <article class="phone-card-single">
-          <img
-            src="/img/samsung-galaxy-s23.png"
-            alt="<%= orderProduct.product_name %>"
-          />
+          <div class="phone-card-img">
+            <img
+              src="/img/samsung-galaxy-s23.png"
+              alt="<%= orderProduct.product_name %>"
+            />
+          </div>
           <article class="phone-card-content">
             <h2><%= orderProduct.product_name %></h2>
             <span><%= `$${orderProduct.product_price} `%></span>
@@ -22,39 +24,36 @@
             <p><%= orderProduct.product_description%></p>
           </article>
         </article>
-        <article class="order-confirmation-details">
-          <!-- Customer Name -->
-          <label for="name">Customer Name:</label>
-          <span id="name"
-            ><%= `${orderProduct.customer_first_name}
-            ${orderProduct.customer_last_name} `%></span
-          >
-          <!-- Product Ordered -->
-          <label for="product">Product Ordered: </label>
-          <span id="product"><%= orderProduct.product_name %></span>
-          <!-- Order Time -->
-          <label for="time">Order Time:</label>
-          <span id="time"
-            ><%= orderProduct.order_datetime.toLocaleString() %></span
-          >
-          <!-- Order Status -->
-          <label for="status">Order Status:</label>
-          <span id="status" class="form-input"
-            ><%= orderProduct.order_status %></span
-          >
-          <article class="form-buttons">
-            <a
-              href="/product_list"
-              class="button-secondary button"
-              role="button"
-              >Back</a
+        <article class="order-confirmation-container">
+          <article class="order-confirmation-details">
+            <!-- Customer Name -->
+            <label for="name">Customer Name:</label>
+            <span id="name"
+              ><%= `${orderProduct.customer_first_name}
+              ${orderProduct.customer_last_name} `%></span
             >
-            <input
-              type="submit"
-              value="Refresh"
-              class="button-primary button"
-              role="button"
-            />
+            <!-- Product Ordered -->
+            <label for="product">Product Ordered: </label>
+            <span id="product"><%= orderProduct.product_name %></span>
+            <!-- Order Time -->
+            <label for="time">Order Time:</label>
+            <span id="time"
+              ><%= orderProduct.order_datetime.toLocaleString() %></span
+            >
+            <!-- Order Status -->
+            <label for="status">Order Status:</label>
+            <span id="status" class="form-input"
+              ><%= orderProduct.order_status %></span
+            >
+            <article class="form-buttons">
+              <a
+                href="/product_list"
+                class="button-secondary button"
+                role="button"
+                >Back</a
+              >
+              <a href="" class="button-primary button" role="button">Refresh</a>
+            </article>
           </article>
         </article>
       </section>

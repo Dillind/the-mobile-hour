@@ -36,12 +36,6 @@ app.use(featureController);
 import changelogController from "./controllers/changelog.js";
 app.use(changelogController);
 
-// Redirect request to root to the product list page
-
-app.get("/", (req, res) => {
-  res.status(301).redirect("/product_list");
-});
-
 // Home page, about and contact page rendering
 
 app.get("/", (req, res) => {

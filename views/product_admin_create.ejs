@@ -16,88 +16,87 @@
         <a href="/product_admin_feature">View Features</a>
         <a href="/product_admin_create_feature">Create Feature</a>
       </nav>
-      <form action="/create_product" method="post" class="create-form">
-        <!-- Product Name -->
-        <label for="name">Product Name:</label>
-        <input
-          type="text"
-          name="product_name"
-          class="create-form-input"
-          placeholder="Enter product name:"
-          required
-        />
-        <!-- Product Model -->
-        <label for="model">Product Model:</label>
-        <input
-          type="text"
-          name="product_model"
-          class="create-form-input"
-          placeholder="Enter the product model"
-          required
-        />
-        <!-- Product Manufacturer -->
-        <label for="manufacturer">Product Manufacturer:</label>
-        <input
-          type="text"
-          name="product_manufacturer"
-          class="create-form-input"
-          placeholder="Enter the product manufacturer"
-          required
-        />
-        <!-- Product Price -->
-        <label for="price">Product Price:</label>
-        <input
-          type="number"
-          name="product_price"
-          class="create-form-input"
-          placeholder="Enter the product price"
-          required
-        />
-        <!-- Product Stock -->
-        <label for="stock">Product Stock:</label>
-        <input
-          type="number"
-          name="product_stock"
-          class="create-form-input"
-          placeholder="Enter the product stock quantity"
-          required
-        />
-
-        <!-- Product Description -->
-        <label for="description">Product Description:</label>
-        <textarea
-          name="product_description"
-          id="product-description"
-          class="create-form-input"
-          cols="30"
-          rows="10"
-        ></textarea>
-
-        <!-- Product Feature ID -->
-        <!-- COMMENT FOR JASPER: This is causing me issues and not displaying all the features from the feature table, only the features that are connected to an existing product - how do i fix this? -->
-        <label for="feature-id">Feature ID:</label>
-        <select name="product_feature_id" class="create-form-input">
-          <% for (let productStaff of productsStaff) { %>
-          <option value="<%= productStaff.product_feature_id %>">
-            <%= productStaff.product_name %> - <%=
-            productStaff.product_feature_id %>
-          </option>
-          <% } %>
-        </select>
-
-        <input
-          type="reset"
-          name="action"
-          id="reset"
-          value="reset"
-          class="button-primary button"
-        />
-        <input
-          type="submit"
-          value="Create Product"
-          class="button-primary button"
-        />
-      </form>
+      <article class="form-container">
+        <form action="/create_product" method="post" class="create-form">
+          <h4 class="form-title">Enter the details of the product below</h4>
+          <!-- Product Name -->
+          <label for="name">Product Name:</label>
+          <input
+            type="text"
+            name="product_name"
+            class="create-form-input"
+            placeholder="Enter the product name:"
+            required
+          />
+          <!-- Product Model -->
+          <label for="model">Product Model:</label>
+          <input
+            type="text"
+            name="product_model"
+            class="create-form-input"
+            placeholder="Enter the product model:"
+            required
+          />
+          <!-- Product Manufacturer -->
+          <label for="manufacturer">Product Manufacturer:</label>
+          <input
+            type="text"
+            name="product_manufacturer"
+            class="create-form-input"
+            placeholder="Enter the product manufacturer:"
+            required
+          />
+          <!-- Product Price -->
+          <label for="price">Product Price:</label>
+          <input
+            type="number"
+            name="product_price"
+            class="create-form-input"
+            placeholder="Enter the product price:"
+            required
+          />
+          <!-- Product Stock -->
+          <label for="stock">Product Stock:</label>
+          <input
+            type="number"
+            name="product_stock"
+            class="create-form-input"
+            placeholder="Enter the product stock quantity:"
+            required
+          />
+          <!-- Product Description -->
+          <label for="description">Product Description:</label>
+          <textarea
+            name="product_description"
+            id="product-description"
+            class="create-form-input"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <!-- Product Feature ID -->
+          <label for="feature-id">Feature ID:</label>
+          <select name="product_feature_id" class="create-form-input">
+            <option value="" selected disabled>Select Feature</option>
+            <% for (let feature of features) { %>
+            <option value="<%= feature.id %>">
+              <%= feature.id %> - <%= feature.color %>
+            </option>
+            <% } %>
+          </select>
+          <input
+            type="reset"
+            name="action"
+            id="reset"
+            value="reset"
+            class="button-primary button"
+          />
+          <input
+            type="submit"
+            value="Create Product"
+            class="button-primary button"
+          />
+        </form>
+      </article>
     </section>
     <!--  Footer -->
     <%- include("partials/footer.ejs") %>

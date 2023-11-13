@@ -1,4 +1,11 @@
 {
-    "editor.formatOnSave": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "j69.ejs-beautify",
+  "cSpell.words": [
+    "Btns",
+    "screensize"
+  ],
+  "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

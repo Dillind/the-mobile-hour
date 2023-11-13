@@ -16,127 +16,142 @@
         <a href="/product_admin_feature">View Features</a>
         <a href="/product_admin_create_feature">Create Feature</a>
       </nav>
-      <form action="/create_feature" method="post" class="create-form">
-        <!-- Feature Colour -->
-        <label for="color">Colour:</label>
-        <input
-          type="text"
-          name="feature_color"
-          class="create-form-input"
-          placeholder="Enter product colour (e.g. Black)"
-        />
+      <article class="form-container">
+        <form action="/create_feature" method="post" class="create-form">
+          <h4 class="form-title">Enter the details of the feature below</h4>
+          <!-- Feature Colour -->
+          <label for="color">Colour:</label>
+          <input
+            type="text"
+            name="feature_color"
+            class="create-form-input"
+            placeholder="Enter product colour (e.g. Black)"
+            required
+          />
 
-        <!-- Feature Weight -->
-        <label for="weight">Weight (grams):</label>
-        <input
-          type="text"
-          name="feature_weight"
-          class="create-form-input"
-          placeholder="Enter product weight (e.g. 250)"
-        />
+          <!-- Feature Weight -->
+          <label for="weight">Weight (grams):</label>
+          <input
+            type="text"
+            name="feature_weight"
+            class="create-form-input"
+            placeholder="Enter product weight (e.g. 250)"
+            required
+          />
 
-        <!-- Feature Dimensions -->
-        <label for="dimensions">Dimensions (inches):</label>
-        <input
-          type="text"
-          name="feature_dimensions"
-          class="create-form-input"
-          placeholder="Enter product dimensions (e.g. 5.76 x 2.79 x 0.30)"
-        />
+          <!-- Feature Dimensions -->
+          <label for="dimensions">Dimensions (inches):</label>
+          <input
+            type="text"
+            name="feature_dimensions"
+            class="create-form-input"
+            placeholder="Enter product dimensions (e.g. 5.76 x 2.79 x 0.30)"
+            required
+          />
 
-        <!-- Feature OS -->
-        <label for="OS">OS:</label>
-        <input
-          type="text"
-          name="feature_OS"
-          class="create-form-input"
-          placeholder="Enter product OS (e.g. iOS 16)"
-        />
+          <!-- Feature OS -->
+          <label for="OS">OS:</label>
+          <input
+            type="text"
+            name="feature_OS"
+            class="create-form-input"
+            placeholder="Enter product OS (e.g. iOS 16)"
+            required
+          />
 
-        <!-- Feature Screensize -->
-        <label for="screensize">Screensize (inches):</label>
-        <input
-          type="text"
-          name="feature_screensize"
-          class="create-form-input"
-          placeholder="Enter product screensize (e.g. 6.1)"
-        />
+          <!-- Feature Screensize -->
+          <label for="screensize">Screensize (inches):</label>
+          <input
+            type="text"
+            name="feature_screensize"
+            class="create-form-input"
+            placeholder="Enter product screensize (e.g. 6.1)"
+            required
+          />
 
-        <!-- Feature Resolution -->
-        <label for="resolution">Resolution (pixels):</label>
-        <input
-          type="text"
-          name="feature_resolution"
-          class="create-form-input"
-          placeholder="Enter product resolution (e.g. 1179 x 2556)"
-        />
+          <!-- Feature Resolution -->
+          <label for="resolution">Resolution (pixels):</label>
+          <input
+            type="text"
+            name="feature_resolution"
+            class="create-form-input"
+            placeholder="Enter product resolution (e.g. 1179 x 2556)"
+            required
+          />
 
-        <!-- Feature CPU -->
-        <label for="CPU">CPU:</label>
-        <input
-          type="text"
-          name="feature_CPU"
-          class="create-form-input"
-          placeholder="Enter product CPU (e.g. Hexa-core (2x3.46 GHz Everest + 4x2.02 GHz Sawtooth))"
-        />
+          <!-- Feature CPU -->
+          <label for="CPU">CPU:</label>
+          <input
+            type="text"
+            name="feature_CPU"
+            class="create-form-input"
+            placeholder="Enter product CPU (e.g. Hexa-core (2x3.46 GHz Everest + 4x2.02 GHz Sawtooth))"
+            required
+          />
 
-        <!-- Feature RAM -->
-        <label for="RAM">RAM (GB):</label>
-        <input
-          type="text"
-          name="feature_RAM"
-          class="create-form-input"
-          placeholder="Enter product RAM (e.g. 8)"
-        />
+          <!-- Feature RAM -->
+          <label for="RAM">RAM (GB):</label>
+          <input
+            type="text"
+            name="feature_RAM"
+            class="create-form-input"
+            placeholder="Enter product RAM (e.g. 8)"
+            required
+          />
 
-        <!-- Feature Storage -->
-        <label for="storage">Storage (GB):</label>
-        <input
-          type="text"
-          name="feature_storage"
-          class="create-form-input"
-          placeholder="Enter product storage (e.g. 128)"
-        />
+          <!-- Feature Storage -->
+          <label for="storage">Storage (GB):</label>
+          <input
+            type="text"
+            name="feature_storage"
+            class="create-form-input"
+            placeholder="Enter product storage (e.g. 128)"
+            required
+          />
 
-        <!-- Feature Battery -->
-        <label for="battery">Battery (mAH):</label>
-        <input
-          type="text"
-          name="feature_battery"
-          class="create-form-input"
-          placeholder="Enter product battery (e.g. 3200)"
-        />
+          <!-- Feature Battery -->
+          <label for="battery">Battery (mAH):</label>
+          <input
+            type="text"
+            name="feature_battery"
+            class="create-form-input"
+            placeholder="Enter product battery (e.g. 3200)"
+            required
+          />
 
-        <!-- Feature Rear Camera -->
-        <label for="rear_camera">Rear Camera (MP):</label>
-        <input
-          type="text"
-          name="feature_rear_camera"
-          class="create-form-input"
-          placeholder="Enter product rear camera (e.g. 48)"
-        />
+          <!-- Feature Rear Camera -->
+          <label for="rear_camera">Rear Camera (MP):</label>
+          <input
+            type="text"
+            name="feature_rear_camera"
+            class="create-form-input"
+            placeholder="Enter product rear camera (e.g. 48)"
+            required
+          />
 
-        <!-- Feature Front Camera -->
-        <label for="front_camera">Front Camera (MP):</label>
-        <input
-          type="text"
-          name="feature_front_camera"
-          class="create-form-input"
-          placeholder="Enter product front camera (e.g. 12)"
-        />
-        <input
-          type="reset"
-          name="action"
-          id="reset"
-          value="reset"
-          class="button-primary button"
-        />
-        <input
-          type="submit"
-          value="Create Feature"
-          class="button-primary button"
-        />
-      </form>
+          <!-- Feature Front Camera -->
+          <label for="front_camera">Front Camera (MP):</label>
+          <input
+            type="text"
+            name="feature_front_camera"
+            class="create-form-input"
+            placeholder="Enter product front camera (e.g. 12)"
+            required
+          />
+          <input
+            type="reset"
+            name="action"
+            id="reset"
+            value="reset"
+            class="button-primary button"
+          />
+          <input
+            type="submit"
+            value="Create Feature"
+            class="button-primary button"
+          />
+        </form>
+      </article>
     </section>
     <!--  Footer -->
     <%- include("partials/footer.ejs") %>

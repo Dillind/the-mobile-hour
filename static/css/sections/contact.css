@@ -8,7 +8,7 @@
 
 .contact-store-location {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 .contact-store-location p {
   margin-top: 10px;
@@ -16,25 +16,24 @@
 
 .contact-store-number {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
-.contact-store-number p {
-  margin-top: 10px;
-  font-size: 1em;
+.contact-email {
+  text-align: center;
+  margin-top: 60px;
 }
 
 .contact-trading-hours {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .contact-trading-hours ul {
   list-style: none;
   line-height: 50px;
-  margin-top: 10px;
 }
 
 .contact-trading-hours > ul > li {
-  font-size: 1em;
+  font-size: 16px;
 }

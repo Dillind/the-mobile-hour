@@ -118,6 +118,11 @@ main {
 
 textarea {
   resize: none;
+  font-family: "Arial", sans-serif;
+}
+
+input {
+  font-family: "Arial", sans-serif;
 }
 
 /* Grid Column Styling */

@@ -75,7 +75,7 @@
           ></textarea>
           <!-- Product Feature ID -->
           <label for="feature-id">Feature ID:</label>
-          <select name="product_feature_id" class="create-form-input">
+          <select name="product_feature_id" class="create-form-input" required>
             <option value="" selected disabled>Select Feature</option>
             <% for (let feature of features) { %>
             <option value="<%= feature.id %>">

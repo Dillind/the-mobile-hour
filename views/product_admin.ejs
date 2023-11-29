@@ -57,6 +57,7 @@
             name="name"
             class="create-form-input"
             value="<%= editProduct.name %>"
+            required
           />
           <!-- Product Model -->
           <label for="model">Model:</label>
@@ -65,6 +66,7 @@
             name="model"
             class="create-form-input"
             value="<%= editProduct.model %>"
+            required
           />
           <!-- Product Manufacturer -->
           <label for="manufacturer">Manufacturer:</label>
@@ -73,6 +75,7 @@
             name="manufacturer"
             class="create-form-input"
             value="<%= editProduct.manufacturer %>"
+            required
           />
           <!-- Product Price -->
           <label for="price">Price:</label>
@@ -81,6 +84,7 @@
             name="price"
             class="create-form-input"
             value="<%= editProduct.price !== 0 ? editProduct.price : "" %>"
+            required
           />
           <!-- Product Stock-->
           <label for="stock">Stock:</label>
@@ -89,6 +93,7 @@
             name="stock"
             class="create-form-input"
             value="<%= editProduct.stock !== 0 ? editProduct.stock : 0 %>"
+            required
           />
           <!-- Product Description-->
           <label for="description">Description:</label>
@@ -101,7 +106,7 @@
           >
           <!-- Product Feature ID -->
           <label for="feature-id">Feature ID:</label>
-          <select name="feature_id" class="create-form-input">
+          <select name="feature_id" class="create-form-input" required>
             <option value="" selected disabled>Select Feature</option>
             <% for (let feature of features) { %>
             <option value="<%= feature.id %>" <% if (feature.id === editProduct.feature_id) {%>selected<%} %>>

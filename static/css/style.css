@@ -68,10 +68,10 @@ main {
   outline: none;
   text-align: center;
   cursor: pointer;
-  height: 38px;
-  max-width: 120px;
+  max-width: 140px;
   width: 100%;
   text-transform: capitalize;
+  font-family: "Montserrat", sans-serif;
 }
 
 .button-primary {

@@ -9,26 +9,29 @@
     <%- include("partials/header.ejs") %>
     <main>
       <section class="login-section">
-        <form action="/staff_login" method="post" class="login-form">
+        <form
+          action="/staff_login"
+          method="post"
+          class="login-form"
+          id="login-form"
+        >
           <article class="login-form-content">
             <div class="login-form-header">Login</div>
-            <!-- Username -->
             <label for="username">Username:</label>
             <input
               type="text"
               class="login-form-input"
               name="username"
+              id="username"
               placeholder="Enter your username"
-              required
             />
-            <!-- Password -->
             <label for="password">Password:</label>
             <input
               type="password"
               class="login-form-input"
               name="password"
+              id="password"
               placeholder="Enter your password"
-              required
             />
             <article class="login-form-buttons">
               <a href="/" class="button-secondary button">Back</a>
@@ -37,6 +40,32 @@
                 value="Login"
                 class="button-primary button"
               />
+            </article>
+            <div class="login-split">
+              <h4>OR</h4>
+              <p>Select from a role below:</p>
+            </div>
+            <article class="login-admin-buttons">
+              <!-- button 1 - Login as Admin User -->
+              <button
+                type="submit"
+                name="role"
+                value="user"
+                class="button-secondary button"
+                id="adminUserBtn"
+              >
+                Admin User
+              </button>
+              <!-- button 2 - Login as Admin Manager -->
+              <button
+                type="submit"
+                name="role"
+                value="manager"
+                class="button-primary button"
+                id="adminManagerBtn"
+              >
+                Admin Manager
+              </button>
             </article>
           </article>
         </form>

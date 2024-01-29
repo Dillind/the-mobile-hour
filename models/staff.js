@@ -81,6 +81,7 @@ export function getById(staffId) {
     });
 }
 
+// Get by username
 export function getByUsername(username) {
   return db_conn
     .query(`SELECT * FROM staff WHERE staff_username = ?`, [username])
@@ -97,6 +98,28 @@ export function getByUsername(username) {
         );
       } else {
         return Promise.reject("No matching username found");
+      }
+    });
+}
+
+// Get by Access Role
+export function getByRole(role) {
+  return db_conn
+    .query(`SELECT * FROM staff WHERE staff_access_role = ?`, [role])
+    .then(([queryResult]) => {
+      if (queryResult.length > 0) {
+        return queryResult.map((result) =>
+          newStaff(
+            result.staff_id,
+            result.staff_first_name,
+            result.staff_last_name,
+            result.staff_access_role,
+            result.staff_username,
+            result.staff_password
+          )
+        );
+      } else {
+        return Promise.reject("No matching role found");
       }
     });
 }

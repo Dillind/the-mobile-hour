@@ -16,41 +16,61 @@ staffController.post("/staff_login", (req, res) => {
   const login_username = req.body.username;
   const login_password = req.body.password;
 
-  Staff.getByUsername(login_username)
-    .then((staff) => {
-      if (bcrypt.compareSync(login_password, staff.password)) {
-        req.session.user = {
-          staffId: staff.id,
-          accessRole: staff.access_role,
-        };
+  const admin_role = req.body.role;
 
-        // Changelog entry
-        const staffChangelogEntry = Changelog.newChangelog(
-          null,
-          null,
-          req.session.user.staffId,
-          `${staff.username} logged in`
-        );
-
-        Changelog.create(staffChangelogEntry).catch((error) => {
-          console.log("Failed to add to changelog " + staffChangelogEntry);
-        });
-
-        // If successful, redirect to order admin page
-        res.redirect("/order_admin");
-      } else {
-        res.render("status.ejs", {
-          status: "Login Failed",
-          message: "Invalid password",
-        });
-      }
-    })
-    .catch((error) => {
-      res.render("status.ejs", {
-        status: "Staff member not found",
-        message: error,
+  if (admin_role === undefined) {
+    if (!login_username || !login_password) {
+      return res.render("status.ejs", {
+        status: "Invalid input",
+        message: "Username and password are required.",
       });
+    }
+    Staff.getByUsername(login_username)
+      .then((staff) => {
+        if (bcrypt.compareSync(login_password, staff.password)) {
+          req.session.user = {
+            staffId: staff.id,
+            accessRole: staff.access_role,
+          };
+
+          // Changelog entry
+          const staffChangelogEntry = Changelog.newChangelog(
+            null,
+            null,
+            req.session.user.staffId,
+            `${staff.username} logged in`
+          );
+
+          Changelog.create(staffChangelogEntry).catch((error) => {
+            console.log("Failed to add to changelog " + staffChangelogEntry);
+          });
+
+          // If successful, redirect to order admin page
+          res.redirect("/order_admin");
+        } else {
+          res.render("status.ejs", {
+            status: "Login Failed",
+            message: "Invalid password",
+          });
+        }
+      })
+      .catch((error) => {
+        res.render("status.ejs", {
+          status: "Staff member not found",
+          message: error,
+        });
+      });
+  } else if (admin_role === "user" || admin_role === "manager") {
+    req.session.user = {
+      accessRole: admin_role,
+    };
+    res.redirect("/order_admin");
+  } else {
+    res.render("status.ejs", {
+      status: "Invalid role",
+      message: "Please select a valid role",
     });
+  }
 });
 
 staffController.get("/staff_logout", (req, res) => {

@@ -24,6 +24,28 @@
   text-transform: uppercase;
 }
 
+.login-split {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.login-split h4 {
+  margin-bottom: 20px;
+}
+
+.login-split p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.login-admin-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
 .login-form-input {
   width: 100%;
   margin-bottom: 20px;

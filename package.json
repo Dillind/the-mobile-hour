@@ -1,6 +1,18 @@
 {
   "name": "ictweb513_ictdbs507_at2_website_lindsay_474742019",
   "version": "1.0.0",
+  "builds": [
+    {
+      "src": "./server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "destination": "/"
+    }
+  ],
   "description": "",
   "main": "server.js",
   "type": "module",
@@ -22,3 +34,20 @@
     "validator": "^13.11.0"
   }
 }
+
+
+// {
+//   "version": 2,
+//   "builds": [
+//     {
+//       "src": "./server.js",
+//       "use": "@vercel/node"
+//     }
+//   ],
+//   "routes": [
+//     {
+//       "src": "/(.*)",
+//       "destination": "/"
+//     }
+//   ]
+// }

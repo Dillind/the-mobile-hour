@@ -1,6 +1,5 @@
 import express from "express";
-// import session from "express-session";
-import session from "cookie-session";
+import session from "express-session";
 
 const app = express();
 const port = 8080;

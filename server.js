@@ -1,5 +1,6 @@
 import express from "express";
-import session from "express-session";
+// import session from "express-session";
+import session from "cookie-session";
 
 const app = express();
 const port = 8080;
@@ -22,7 +23,9 @@ app.use(
 app.set("view engine", "ejs");
 
 // Setup and use static files middleware
-app.use(express.static("static"));
+// app.use(express.static("static"));
+
+app.use(express.static("static", { extensions: ["html"] }));
 
 // Import and use controllers
 import productController from "./controllers/products.js";

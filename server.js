@@ -2,7 +2,6 @@ import express from "express";
 import session from "express-session";
 
 const app = express();
-const port = 8080;
 
 // Enable support for URL-encoded request bodies (form posts)
 app.use(express.urlencoded({ extended: true }));
@@ -54,5 +53,5 @@ app.get("/contact", (req, res) => {
 
 // Start listening for requests
 app.listen(port, () => {
-  console.log(`Express server started on http://localhost:${port}`);
+  console.log(`Express server started on http://localhost:${process.env.PORT}`);
 });

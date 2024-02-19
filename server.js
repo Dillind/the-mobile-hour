@@ -52,6 +52,6 @@ app.get("/contact", (req, res) => {
 });
 
 // Start listening for requests
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Express server started on http://localhost:${process.env.PORT}`);
 });

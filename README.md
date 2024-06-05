@@ -11,7 +11,9 @@ The aim of **The Mobile Hour** is to offer a modern, secure and user-friendly pl
 The application follows the MVC (Model-View-Controller) architectural pattern, ensuring a clear separation of concerns:
 
 **Model**: Manages the application's data and logic.
+
 **View**: Represents the UI of the application, rendered dynamically using EJS templates.
+
 **Controller**: Handles the user input, interacts with the model, and renders the appropriate view.
 
 ## Technologies Used

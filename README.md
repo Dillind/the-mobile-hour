@@ -49,7 +49,7 @@ To get started with **The Mobile Hour Web Application**, follow the steps outlin
    ```
 
 3. Set up your database (there is a sample DB in `mysql-dump/the-mobile-hour.sql`) and
-   configure the connection in the `database.js` file in the root directory.
+   configure the connection in the `database.js` file located in the root directory.
 
 4. Start the backend localhost server:
 
